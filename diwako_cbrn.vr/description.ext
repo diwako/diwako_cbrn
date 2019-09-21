@@ -1,0 +1,66 @@
+#define NAME "CBRN Showcase"
+
+class CfgFunctions {
+    #include "scripts\cbrn\funcs.hpp"
+};
+
+class CfgSounds {
+    sounds[] = {};
+    #include "scripts\cbrn\sounds\sounds.hpp"
+};
+
+class RscTitles {
+    #include "scripts\cbrn\rsctitles.hpp"
+}
+
+class Extended_PreInit_EventHandlers {
+    class cbrn_preInit {
+        init = "[] call compile preProcessFileLineNumbers 'scripts\cbrn\XEH_PreInit.sqf'";
+    };
+};
+
+class Extended_InitPost_EventHandlers {
+    #include "scripts\cbrn\XEH_InitPost_eh.hpp"
+};
+
+
+// === DO NOT EDIT BELOW
+OnLoadName = NAME;// Mission name (short)
+onLoadMission=""; // Longer description
+briefingName = NAME;
+overviewText = "";
+author="diwako";
+
+class Header {
+    gameType = Coop;
+    minPlayers = 1;
+    maxPlayers = 1;
+};
+disabledAI = 1;
+
+respawn = BASE;
+respawnDelay = 2;
+respawnDialog = 0;
+
+showGPS = 1;
+showMap = 1;
+showWatch = 1;
+showCompass = 1;
+joinUnassigned = 1;
+allowFunctionsLog = 0;
+enableDebugConsole[] = {"76561197980328722"};
+enableTargetDebug = 1;
+onLoadIntroTime = 0;
+enableItemsDropping = 0;
+onLoadMissionTime = 0;
+
+// Clean up settings
+corpseManagerMode = 1;
+corpseLimit = 10;
+corpseRemovalMinTime = 600;
+corpseRemovalMaxTime = 600;
+
+wreckManagerMode = 1;
+wreckLimit = 5;
+wreckRemovalMinTime = 600;
+wreckRemovalMaxTime = 600;
