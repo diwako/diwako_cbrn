@@ -1,6 +1,6 @@
 # diwako_cbrn
 
-Mission script to add an arcadey CBRN machanic into an Arma mission. This script is not meant to be realistic, as breathing in 2 seconds of some bad smell air causing death is not fun on a gameplay level. However you can tune down the max CBRN damage to get this effect if your really wish!\
+Mission script to add an arcadey CBRN mechanic into an Arma mission. This script is not meant to be realistic, as breathing in 2 seconds of some bad smell air causing death is not fun on a gameplay level. However, you can tune down the max CBRN damage to get this effect if you really wish!\
 CBRN threats are abstracted into 4 threat levels which are color coded by green, yellow, orange and red.
 
 Threat level diagram, all threats level requirements stack:
@@ -14,7 +14,7 @@ This script comes with a custom gasmask overlay, breathing sounds and custom low
 
 ## Custom CBRN damage
 
-This script features custom CBRN damage values, it is actually just a flat number and when you go over this number, you die. As CBRN damage takes quite some time to decrease hence why it is not simulated and CBRN damage stays until respawn.\
+This script features custom CBRN damage values, it is just a flat number and when you go over this number, you die. As CBRN damage takes quite some time to decrease hence why it is not simulated and CBRN damage stays until respawn.\
 If a unit reaches 50% of the maximum CBRN damage it will be informed that from now on the CBRN damage will go up passively even if full CBRN protection is present. The unit needs to decontaminate at a small decon shower. Walk up to the shower, activate it via ACE interactions and stand in it until you receive a new message!\
 Warning: Water is finite, make sure to turn off the shower again!
 
@@ -26,7 +26,7 @@ There is only one function that is public to use for mission makers. It is the f
 /*
  * Arguments:
  * 0: Center of zone, position array
- * 1: Threatlevel between 0 and 5, float
+ * 1: Threatlevel between 1 and 4.9, float
  * 2: Radius of full effect, float
  * 3: Radius of partial effect, float
  */
@@ -39,7 +39,7 @@ CBA_A3 and ACE3
 
 ## Variables
 
-There are several variables pre set for Vanilla and ACE3 gear, those can be overwritted either directly in the files or in your own `postinit` function or `init.sqf` file
+There are several variables preset for Vanilla and ACE3 gear, those can be overwritten either directly in the files or in your own `postinit` function or `init.sqf` file
 
 ### cbrn_maxDamage
 
@@ -57,17 +57,17 @@ Default: Array of all vanilla Gasmasks and some select mod ones
 
 Array of strings, warning: CaSeSeNsItiVe!\
 Array of backpacks which are to be considered oxygen tanks.\
-Default: Array containing only the self contained oxygen tank
+Default: Array containing only the self-contained oxygen tank
 
 ### cbrn_suits
 
 Array of strings, warning: CaSeSeNsItiVe!\
-Array of facewear/goggles which are to be considered gasmasks.
+Array of uniforms which are to be considered cbrn suits.
 Default: Array of all Vanilla CBRN suits
 
 ### cbrn_threatMeterItem
 
-String of itemname that should be considered as threatmeter item.\
+String of item name that should be considered as threat meter item.\
 Default: "ACE_microDAGR"
 
 ### cbrn_maxOxygenTime
