@@ -56,7 +56,7 @@ Default: Array of all vanilla Gasmasks and some select mod ones
 ### cbrn_backpacks
 
 Array of strings, warning: CaSeSeNsItiVe!\
-Array of backpacks which are to be considered gasmasks.
+Array of backpacks which are to be considered oxygen tanks.\
 Default: Array containing only the self contained oxygen tank
 
 ### cbrn_suits
