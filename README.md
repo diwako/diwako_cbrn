@@ -74,3 +74,7 @@ Default: "ACE_microDAGR"
 
 Float, value in seconds of how long one oxygen container should last.\
 Default: 30 Minutes
+
+## Links
+
+BI Thread: https://forums.bohemia.net/forums/topic/225668-cbrn-script/
