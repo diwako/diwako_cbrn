@@ -62,7 +62,7 @@ Default: Array containing only the self-contained oxygen tank
 ### cbrn_suits
 
 Array of strings, warning: CaSeSeNsItiVe!\
-Array of uniforms which are to be considered cbrn suits.
+Array of uniforms which are to be considered cbrn suits.\
 Default: Array of all Vanilla CBRN suits
 
 ### cbrn_threatMeterItem
