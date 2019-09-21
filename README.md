@@ -1,6 +1,6 @@
 # diwako_cbrn
 
-Mission script to add an arcadey CBRN machanic into an Arma mission. This script is not meant to be realistic, as breathing in 2 seconds of some bad smell air causing death is not fun on a gameplay level. However you can tune doen the max CBRN damage to get this effect if your really wish!\
+Mission script to add an arcadey CBRN machanic into an Arma mission. This script is not meant to be realistic, as breathing in 2 seconds of some bad smell air causing death is not fun on a gameplay level. However you can tune down the max CBRN damage to get this effect if your really wish!\
 CBRN threats are abstracted into 4 threat levels which are color coded by green, yellow, orange and red.
 
 Threat level diagram, all threats level requirements stack:
@@ -65,9 +65,9 @@ Array of strings, warning: CaSeSeNsItiVe!\
 Array of facewear/goggles which are to be considered gasmasks.
 Default: Array of all Vanilla CBRN suits
 
-### cbrn_threatMeteritem
+### cbrn_threatMeterItem
 
-String of itemname that should be considered as Threatmeter item.\
+String of itemname that should be considered as threatmeter item.\
 Default: "ACE_microDAGR"
 
 ### cbrn_maxOxygenTime
