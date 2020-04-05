@@ -214,6 +214,7 @@ player addEventHandler ["Respawn", {
     player setVariable ["cbrn_damage", nil];
     player setVariable ["cbrn_autoDamage", nil];
     player setVariable ["cbrn_stoppedAutoDamage", nil];
+    player getVariable ["cbrn_using_threat_meter", nil];
     player setVariable ["cbrn_oxygen", nil];
 }];
 
@@ -232,6 +233,7 @@ _action = ["cbrn_turn_check_damage", "Check CRBN Exposure","",{
     titleText ["You are feeling <t color='#ff0000'>really fucking bad</t>! The end is near..." , "PLAIN DOWN", -1, false, true];
 },{true},{},[], [0,0,0], 3] call ace_interact_menu_fnc_createAction;
 ["CAManBase", 1, ["ACE_SelfActions","Medical"], _action, true] call ace_interact_menu_fnc_addActionToClass;
+["CAManBase", 1, ["ACE_SelfActions","ACE_Medical"], _action, true] call ace_interact_menu_fnc_addActionToClass;
 
 _action = ["cbrn_turn_on_threatmeter", "Turn on threatmeter","",{
     ace_player setVariable ["cbrn_using_threat_meter", true, true];
