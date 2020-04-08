@@ -58,3 +58,39 @@ class lowoxwarning
     sound[] = {"scripts\cbrn\sounds\lowoxwarning.ogg", 1.5, 1, 50};
     titles[]={};
 };
+class detector_beep_0
+{
+    name = "detector_beep_0";
+    sound[] = {"scripts\cbrn\sounds\detectorbeep.ogg", 0.25, 1, 50};
+    titles[]={};
+};
+class detector_beep_1
+{
+    name = "detector_beep_0";
+    sound[] = {"scripts\cbrn\sounds\detectorbeep.ogg", 0.5, 1, 50};
+    titles[]={};
+};
+class detector_beep_2
+{
+    name = "detector_beep_1";
+    sound[] = {"scripts\cbrn\sounds\detectorbeep.ogg", 0.75, 1, 50};
+    titles[]={};
+};
+class detector_beep_3
+{
+    name = "detector_beep_2";
+    sound[] = {"scripts\cbrn\sounds\detectorbeep.ogg", 1, 1, 50};
+    titles[]={};
+};
+class detector_beep_4
+{
+    name = "detector_beep_3";
+    sound[] = {"scripts\cbrn\sounds\detectorbeep.ogg", 2, 1, 50};
+    titles[]={};
+};
+class detector_beep_5
+{
+    name = "detector_beep_4";
+    sound[] = {"scripts\cbrn\sounds\detectorbeep.ogg", 3, 1, 50};
+    titles[]={};
+};
