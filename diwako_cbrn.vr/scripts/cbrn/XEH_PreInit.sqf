@@ -24,6 +24,10 @@ cbrn_maxOxygenTime = 60 * 30;
 // do not edit below here unless you know what you are doing
 if !(hasInterface) exitWith {};
 cbrn_localZones = [];
+cbrn_curThreat = 0;
+cbrn_lastBeep = -1;
+cbrn_beepVolume = 2;
+cbrn_beep = true;
 ["cbrn_createZone", {
     params ["_pos", "_threatLevel", "_size", "_falloffArea"];
     private _trg = createTrigger ["EmptyDetector", _pos, false];

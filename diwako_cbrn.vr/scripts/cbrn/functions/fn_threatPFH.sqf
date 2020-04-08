@@ -1,3 +1,4 @@
+if (isGamePaused) exitWith {};
 params ["_args", "_idPFH"];
 _args params ["_lastIteration"];
 private _player = ace_player;
@@ -26,6 +27,7 @@ if (alive _player && {!(_zones isEqualTo [])}) then {
 private _time = cba_missiontime;
 private _delta = _time - _lastIteration;
 _args set [0, _time];
+cbrn_curThreat = _max;
 [_player, _max, _delta] call cbrn_fnc_handleDamage;
 
 if (_player getVariable ["cbrn_using_threat_meter", false]) then {
@@ -57,11 +59,37 @@ if (_player getVariable ["cbrn_using_threat_meter", false]) then {
         _ctrl ctrlCommit 0;
         uiNamespace setVariable ["cbrn_threatOverlayCtrl", _ctrl];
     };
+    private _brightness = ([] call ace_common_fnc_ambientBrightness) max 0.25;
+    private _base = uiNamespace getVariable ["cbrn_threatBaseCtrl", ctrlNull];
+    private _overlay = uiNamespace getVariable ["cbrn_threatOverlayCtrl", ctrlNull];
     private _needle = uiNamespace getVariable ["cbrn_threatNeedleCtrl", ctrlNull];
+    _base ctrlSetTextColor [_brightness, _brightness, _brightness, 1];
+    _base ctrlCommit _delta;
+    _overlay ctrlSetTextColor [_brightness, _brightness, _brightness, 1];
+    _overlay ctrlCommit _delta;
+    _needle ctrlSetTextColor [_brightness, _brightness, _brightness, 1];
+    _needle ctrlCommit _delta;
+    
     private _dir = (linearConversion [0, 4, _max - 0.05 + (random 0.1), 90, -90, true]) mod 360;
     _needle ctrlSetAngle [_dir, 0.5, 0.5];
 } else {
     ctrlDelete (uiNamespace getVariable ["cbrn_threatBaseCtrl", ctrlNull]);
     ctrlDelete (uiNamespace getVariable ["cbrn_threatNeedleCtrl", ctrlNull]);
     ctrlDelete (uiNamespace getVariable ["cbrn_threatOverlayCtrl", ctrlNull]);
+};
+
+private _hasChemDetector = "ChemicalDetector_01_watch_F" in (assignedItems _player);
+if (visibleWatch && {_hasChemDetector}) then {
+    private _ui = uiNamespace getVariable ["RscWeaponChemicalDetector", displayNull];
+    if !(isNull _ui) then {
+        private _obj = _ui displayCtrl 101;    
+        _obj ctrlAnimateModel ["Threat_Level_Source", (_max - 0.05 + (random 0.1)) max 0, true];
+    };
+};
+
+if !(_hasChemDetector isEqualTo (_player getVariable ["cbrn_detector_beeps", false]))then {
+    _player setVariable ["cbrn_detector_beeps", _hasChemDetector];
+    if (cbrn_beep && {cbrn_beepPfh < 0}) then {
+        cbrn_beepPfh = [cbrn_fnc_detectorBeepPFH, 0.05, [cba_missiontime]] call CBA_fnc_addPerFrameHandler;
+    };
 };

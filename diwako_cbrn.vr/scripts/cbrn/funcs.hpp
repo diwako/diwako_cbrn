@@ -11,5 +11,7 @@ class cbrn{
         class toggleShower{};
         class setUpDeconShower{};
         class getFatigue{};
+        class detectorBeepPFH{};
+        class checkOxygen{};
     };
 };

@@ -462,7 +462,7 @@ class Mission
 									"STRING"
 								};
 							};
-							value="[[[[],[]],[[],[]],[[""U_I_E_CBRN_Suit_01_EAF_F"",""G_AirPurifyingRespirator_02_black_F"",""ACE_microDAGR""],[1,1,1]],[[""B_SCBA_01_F""],[1]]],false]";
+							value="[[[[],[]],[[],[]],[[""U_I_E_CBRN_Suit_01_EAF_F"",""G_AirPurifyingRespirator_02_black_F"",""ACE_microDAGR"",""ChemicalDetector_01_watch_F""],[1,1,1,1]],[[""B_SCBA_01_F""],[1]]],false]";
 						};
 					};
 				};
