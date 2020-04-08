@@ -243,13 +243,13 @@ if !(isNil "CBA_fnc_addItemContextMenuOption") then {
             }], {
             [ace_player] call cbrn_fnc_startOxygen;
             false
-        }, false, [0,1,2]] call CBA_fnc_addItemContextMenuOption;
+        }, false] call CBA_fnc_addItemContextMenuOption;
 
         [_x, "BACKPACK", "Turn off oxygen", nil, nil,
         [{ace_player getVariable ["cbrn_oxygen", false]}, {ace_player getVariable ["cbrn_oxygen", false]}], {
             ace_player setVariable ["cbrn_oxygen", false];
             false
-        }, false, [0,1,2]] call CBA_fnc_addItemContextMenuOption;
+        }, false] call CBA_fnc_addItemContextMenuOption;
 
         [_x, "BACKPACK", "Check remaining oxygen", nil, nil,
         [{true}, {ace_player getVariable ["cbrn_backpack_on", false]}], {
@@ -258,43 +258,43 @@ if !(isNil "CBA_fnc_addItemContextMenuOption") then {
                 [_unit] call cbrn_fnc_checkOxygen;
             }, [ace_player]] call CBA_fnc_execNextFrame;
             false
-        }, false, [0,1,2]] call CBA_fnc_addItemContextMenuOption;
+        }, false] call CBA_fnc_addItemContextMenuOption;
     } forEach cbrn_backpacks;
 
     ["ChemicalDetector_01_watch_F", "WATCH", "Increase volume", nil, nil,
     [{cbrn_beepVolume < 5},{cbrn_beep}], {
         cbrn_beepVolume = cbrn_beepVolume + 1;
         false
-    }, false, [0,1,2]] call CBA_fnc_addItemContextMenuOption;
+    }, false] call CBA_fnc_addItemContextMenuOption;
 
     ["ChemicalDetector_01_watch_F", "WATCH", "Decrease volume", nil, nil,
     [{cbrn_beepVolume > 0},{cbrn_beep}], {
         cbrn_beepVolume = cbrn_beepVolume - 1;
         false
-    }, false, [0,1,2]] call CBA_fnc_addItemContextMenuOption;
+    }, false] call CBA_fnc_addItemContextMenuOption;
 
     ["ChemicalDetector_01_watch_F", "WATCH", "Turn beeping on", nil, nil,
     [{!cbrn_beep},{!cbrn_beep}], {
         cbrn_beep = true;
         cbrn_beepPfh = [cbrn_fnc_detectorBeepPFH, 0.05, [cba_missiontime]] call CBA_fnc_addPerFrameHandler;
         false
-    }, false, [0,1,2]] call CBA_fnc_addItemContextMenuOption;
+    }, false] call CBA_fnc_addItemContextMenuOption;
 
     ["ChemicalDetector_01_watch_F", "WATCH", "Turn beeping off", nil, nil,
     [{cbrn_beep},{cbrn_beep}], {
         cbrn_beep = false;
         false
-    }, false, [0,1,2]] call CBA_fnc_addItemContextMenuOption;
+    }, false] call CBA_fnc_addItemContextMenuOption;
 
     [cbrn_threatMeteritem, "CONTAINER", "Turn on threatmeter", nil, nil,
     [{!(ace_player getVariable ["cbrn_using_threat_meter", false]) && {ace_player getVariable ["cbrn_hasThreatMeter", false]}},{!(ace_player getVariable ["cbrn_using_threat_meter", false]) && {ace_player getVariable ["cbrn_hasThreatMeter", false]}}], {
         ace_player setVariable ["cbrn_using_threat_meter", true, true];
         false
-    }, false, [0,1,2]] call CBA_fnc_addItemContextMenuOption;
+    }, false] call CBA_fnc_addItemContextMenuOption;
 
     [cbrn_threatMeteritem, "CONTAINER", "Turn off threatmeter", nil, nil,
     [{ace_player getVariable ["cbrn_using_threat_meter", false]},{ace_player getVariable ["cbrn_using_threat_meter", false]}], {
         ace_player setVariable ["cbrn_using_threat_meter", false, true];
         false
-    }, false, [0,1,2]] call CBA_fnc_addItemContextMenuOption;
+    }, false] call CBA_fnc_addItemContextMenuOption;
 };
