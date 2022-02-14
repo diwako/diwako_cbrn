@@ -69,7 +69,7 @@ if (_player getVariable ["cbrn_using_threat_meter", false]) then {
     _overlay ctrlCommit _delta;
     _needle ctrlSetTextColor [_brightness, _brightness, _brightness, 1];
     _needle ctrlCommit _delta;
-    
+
     private _dir = (linearConversion [0, 4, _max - 0.05 + (random 0.1), 90, -90, true]) mod 360;
     _needle ctrlSetAngle [_dir, 0.5, 0.5];
 } else {
@@ -79,17 +79,22 @@ if (_player getVariable ["cbrn_using_threat_meter", false]) then {
 };
 
 private _hasChemDetector = "ChemicalDetector_01_watch_F" in (assignedItems _player);
-if (visibleWatch && {_hasChemDetector}) then {
+if (_hasChemDetector && {visibleWatch}) then {
     private _ui = uiNamespace getVariable ["RscWeaponChemicalDetector", displayNull];
     if !(isNull _ui) then {
-        private _obj = _ui displayCtrl 101;    
+        private _obj = _ui displayCtrl 101;
         _obj ctrlAnimateModel ["Threat_Level_Source", (_max - 0.05 + (random 0.1)) max 0, true];
     };
 };
 
-if !(_hasChemDetector isEqualTo (_player getVariable ["cbrn_detector_beeps", false]))then {
+if (_hasChemDetector isNotEqualTo (_player getVariable ["cbrn_detector_beeps", false]))then {
     _player setVariable ["cbrn_detector_beeps", _hasChemDetector];
     if (cbrn_beep && {cbrn_beepPfh < 0}) then {
         cbrn_beepPfh = [cbrn_fnc_detectorBeepPFH, 0.05, [cba_missiontime]] call CBA_fnc_addPerFrameHandler;
     };
+};
+
+if (!(_player getVariable ["cbrn_autoDamage", false]) && {cbrn_healingRate > 0}) then {
+    private _curDamage = _player getVariable ["cbrn_damage", 0];
+    _player setVariable ["cbrn_damage", (_curDamage - (cbrn_healingRate * _delta)) max 0];
 };

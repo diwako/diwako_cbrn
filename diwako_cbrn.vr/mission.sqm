@@ -1,4 +1,4 @@
-version=53;
+version=54;
 class EditorData
 {
 	moveGridStep=1;
@@ -8,7 +8,7 @@ class EditorData
 	toggles=545;
 	class ItemIDProvider
 	{
-		nextID=12;
+		nextID=13;
 	};
 	class MarkerIDProvider
 	{
@@ -16,13 +16,14 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={101.02502,9.4666004,42.705761};
-		dir[]={0.011460001,-0.36052746,0.93268949};
-		up[]={0.004430186,0.93274492,0.36050802};
-		aside[]={0.99993533,-1.8254832e-007,-0.012286752};
+		pos[]={98.010628,8.0878487,40.886696};
+		dir[]={0.040289722,-0.2684398,0.96245366};
+		up[]={0.011227452,0.96329647,0.26820493};
+		aside[]={0.99912506,0,-0.04182484};
 	};
 };
 binarizationWanted=0;
+sourceName="diwako_cbrn";
 addons[]=
 {
 	"A3_Characters_F",
@@ -37,17 +38,19 @@ addons[]=
 	"A3_Weapons_F_Pistols_P07",
 	"ace_nightvision",
 	"A3_Weapons_F_Items",
-	"ace_medical",
+	"ace_medical_engine",
+	"ace_medical_treatment",
 	"ace_attach",
 	"ace_chemlights",
 	"A3_Ui_F",
-	"A3_Supplies_F_Enoch_Ammoboxes"
+	"A3_Supplies_F_Enoch_Ammoboxes",
+	"A3_Props_F_Enoch_Military_Decontamination"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=13;
+		items=14;
 		class Item0
 		{
 			className="A3_Characters_F";
@@ -92,22 +95,22 @@ class AddonsMetaData
 		};
 		class Item6
 		{
-			className="acre_main";
-			name="ACRE2 - Main";
-			author="ACRE2Team";
-			url="https://github.com/IDI-Systems/acre2";
-		};
-		class Item7
-		{
 			className="ace_nightvision";
 			name="ACE3 - Night Vision";
 			author="ACE-Team";
 			url="http://ace3mod.com/";
 		};
+		class Item7
+		{
+			className="ace_medical_engine";
+			name="ACE3 - Medical Engine";
+			author="ACE-Team";
+			url="http://ace3mod.com/";
+		};
 		class Item8
 		{
-			className="ace_medical";
-			name="ACE3 - Medical";
+			className="ace_medical_treatment";
+			name="ACE3 - Medical Treatment";
 			author="ACE-Team";
 			url="http://ace3mod.com/";
 		};
@@ -139,7 +142,18 @@ class AddonsMetaData
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
+		class Item13
+		{
+			className="A3_Props_F_Enoch";
+			name="Arma 3 Contact Platform - Decorative and Mission Objects";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
 	};
+};
+dlcs[]=
+{
+	"Enoch"
 };
 randomSeed=7224421;
 class ScenarioData
@@ -169,7 +183,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=11;
+		items=12;
 		class Item0
 		{
 			dataType="Group";
@@ -301,13 +315,7 @@ class Mission
 							{
 								class data
 								{
-									class type
-									{
-										type[]=
-										{
-											"STRING"
-										};
-									};
+									singleType="STRING";
 									value="Male05ENG";
 								};
 							};
@@ -320,13 +328,7 @@ class Mission
 							{
 								class data
 								{
-									class type
-									{
-										type[]=
-										{
-											"SCALAR"
-										};
-									};
+									singleType="SCALAR";
 									value=0.97000003;
 								};
 							};
@@ -455,19 +457,28 @@ class Mission
 					{
 						class data
 						{
-							class type
-							{
-								type[]=
-								{
-									"STRING"
-								};
-							};
+							singleType="STRING";
 							value="[[[[],[]],[[],[]],[[""U_I_E_CBRN_Suit_01_EAF_F"",""G_AirPurifyingRespirator_02_black_F"",""ACE_microDAGR"",""ChemicalDetector_01_watch_F""],[1,1,1,1]],[[""B_SCBA_01_F""],[1]]],false]";
 						};
 					};
 				};
 				nAttributes=1;
 			};
+		};
+		class Item11
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={94.5886,6.22651,48.597374};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=12;
+			type="DeconShower_01_F";
 		};
 	};
 };

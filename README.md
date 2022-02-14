@@ -18,6 +18,14 @@ This script features custom CBRN damage values, it is just a flat number and whe
 If a unit reaches 50% of the maximum CBRN damage it will be informed that from now on the CBRN damage will go up passively even if full CBRN protection is present. The unit needs to decontaminate at a small decon shower. Walk up to the shower, activate it via ACE interactions and stand in it until you receive a new message!\
 Warning: Water is finite, make sure to turn off the shower again!
 
+## Set up and configuration
+
+1. Copy the scripts folder into your mission
+2. Adapt your description.ext
+   - if you do not have a description.ext, create it next to the mission.sqm in the base folder of your mission
+   - Adapt classes CfgFunctions, CfgSounds, and RscTitle like the example description.ext
+3. Edit `config.sqf` in `scripts\cbrn`
+
 ## Functions for mission makers
 
 There is only one function that is public to use for mission makers. It is the function to create zones, recommended to do so via `initServer.sqf`.
@@ -26,12 +34,24 @@ There is only one function that is public to use for mission makers. It is the f
 /*
  * Arguments:
  * 0: Center of zone, position array
- * 1: Threatlevel between 1 and 4.9, float
+ * 1: Threatlevel between 0 and 4.9, float
  * 2: Radius of full effect, float
  * 3: Radius of partial effect, float
+ *
+ * Returns trigger/zone object
  */
 [getMarkerPos "marker_0", 1.5, 25, 25] call cbrn_fnc_createZone;
 ```
+
+The returned object is a trigger. With it you can either just leave it as is, attach it to some object, or toggle the zone on or off (it is on by default).
+
+To turn the zone off set the variable `cbrn_active` to false, as such:
+
+```sqf
+_trg setVariable ["cbrn_active", false, true];
+```
+
+**WARNING**: Deleting the trigger object is not supported. First disable the zone, wait a few seconds for the value to sync in mp and then delete the trigger if you really must!
 
 ## Requirements
 
@@ -74,6 +94,18 @@ Default: "ACE_microDAGR"
 
 Float, value in seconds of how long one oxygen container should last.\
 Default: 30 Minutes
+
+### cbrn_allowPassiveDamage
+
+Boolean value if the passive contamination should occur after the 50% damage threshold
+
+### cbrn_deconWaterTime
+
+Float, value in seconds. Maximum total runtime
+
+### cbrn_healingRate
+
+Float, rate how much of the exposure damage is healed each second. **Healing is stopped if value is 0 or below, or player is experiencing passive contamination!**
 
 ## Links
 
