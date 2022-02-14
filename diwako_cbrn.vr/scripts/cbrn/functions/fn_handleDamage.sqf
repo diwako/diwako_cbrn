@@ -25,6 +25,12 @@ if (cbrn_allowPassiveDamage && {(_curDamage / _maxDamage) > 0.5 && {!(_unit getV
     }, 1, [_unit]] call CBA_fnc_addPerFrameHandler;
 };
 
+// subtract vehicle proofing
+private _vehicle = vehicle _unit;
+if (_vehicle isNotEqualTo _unit) then {
+    _actualThreat = _actualThreat - (_vehicle getVariable ["cbrn_proofing", 0]);
+};
+
 if (_threadLevel >= 1) then {
     // level 2 threat
     // requires mask

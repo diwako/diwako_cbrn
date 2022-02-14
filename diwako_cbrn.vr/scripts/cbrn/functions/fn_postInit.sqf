@@ -1,5 +1,13 @@
 if (isServer) then {
     publicVariable "cbrn_zoneSimulationRange";
+    cbrn_vebiclesHash = createHashMapFromArray cbrn_vehicles;
+    {
+        _x params ["_class", ["_amount", 0, [0]]];
+        [_class, "initPost",{
+            params ["_vehicle"];
+            _vehicle setVariable ["cbrn_proofing", cbrn_vebiclesHash getOrDefault [typeOf _vehicle, 0], true];
+        }, false, [], true]call CBA_fnc_addClassEventHandler;
+    } forEach cbrn_vehicles;
 };
 
 ["DeconShower_01_F", "initPost",{

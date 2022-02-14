@@ -40,3 +40,9 @@ cbrn_deconWaterTime = 60 * 2;
 
 // healing rate for each second, does nothing if 0 or below, or player while player is experiencing passive contamination
 cbrn_healingRate = 0;
+
+// configure vehicles to be CBRN proof
+// list of arrays, first entry vehicle class, second entry amount of proofing. The amount is the same measurement as zone threat levels
+cbrn_vehicles = [
+    ["B_MRAP_01_F", 5]
+];

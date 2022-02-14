@@ -8,7 +8,7 @@ class EditorData
 	toggles=545;
 	class ItemIDProvider
 	{
-		nextID=13;
+		nextID=14;
 	};
 	class MarkerIDProvider
 	{
@@ -16,7 +16,7 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={98.010628,8.0878487,40.886696};
+		pos[]={99.622688,8.0878487,38.656677};
 		dir[]={0.040289722,-0.2684398,0.96245366};
 		up[]={0.011227452,0.96329647,0.26820493};
 		aside[]={0.99912506,0,-0.04182484};
@@ -44,13 +44,14 @@ addons[]=
 	"ace_chemlights",
 	"A3_Ui_F",
 	"A3_Supplies_F_Enoch_Ammoboxes",
-	"A3_Props_F_Enoch_Military_Decontamination"
+	"A3_Props_F_Enoch_Military_Decontamination",
+	"A3_Soft_F_MRAP_01"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=14;
+		items=15;
 		class Item0
 		{
 			className="A3_Characters_F";
@@ -149,6 +150,13 @@ class AddonsMetaData
 			author="Bohemia Interactive";
 			url="https://www.arma3.com";
 		};
+		class Item14
+		{
+			className="A3_Soft_F";
+			name="Arma 3 Alpha - Unarmored Land Vehicles";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
 	};
 };
 dlcs[]=
@@ -183,7 +191,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=12;
+		items=13;
 		class Item0
 		{
 			dataType="Group";
@@ -479,6 +487,21 @@ class Mission
 			};
 			id=12;
 			type="DeconShower_01_F";
+		};
+		class Item12
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={103.58358,7.2059455,48.471394};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+			};
+			id=13;
+			type="B_MRAP_01_F";
 		};
 	};
 };

@@ -107,6 +107,10 @@ Float, value in seconds. Maximum total runtime
 
 Float, rate how much of the exposure damage is healed each second. **Healing is stopped if value is 0 or below, or player is experiencing passive contamination!**
 
+### cbrn_vehicles
+
+List of vehicle and proofing value pairs. First entry of a pair is the vehicle class, second entry is the proofing values, same measurements as threatlevel.
+
 ## Links
 
 BI Thread: https://forums.bohemia.net/forums/topic/225668-cbrn-script/
