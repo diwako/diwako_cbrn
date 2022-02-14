@@ -11,18 +11,7 @@ class CfgSounds {
 
 class RscTitles {
     #include "scripts\cbrn\rsctitles.hpp"
-}
-
-class Extended_PreInit_EventHandlers {
-    class cbrn_preInit {
-        init = "[] call compile preProcessFileLineNumbers 'scripts\cbrn\XEH_PreInit.sqf'";
-    };
 };
-
-class Extended_InitPost_EventHandlers {
-    #include "scripts\cbrn\XEH_InitPost_eh.hpp"
-};
-
 
 // === DO NOT EDIT BELOW
 OnLoadName = NAME;// Mission name (short)

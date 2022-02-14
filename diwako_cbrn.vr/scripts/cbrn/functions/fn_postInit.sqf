@@ -1,7 +1,26 @@
 if (isServer) then {
-    cbrn_zoneSimulationRange = 500;
     publicVariable "cbrn_zoneSimulationRange";
+    cbrn_vehicles = cbrn_vehicles apply {
+        _x params [["_obj", "nothing", [""]], "_value"];
+        _obj = missionNamespace getVariable [_obj, _obj];
+        if !(_obj isEqualType "") then {
+            _obj = typeOf _obj;
+        };
+        [_obj, _value]
+    };
+    cbrn_vebiclesHash = createHashMapFromArray cbrn_vehicles;
+    {
+        _x params ["_class"];
+        [_class, "initPost",{
+            params ["_vehicle"];
+            _vehicle setVariable ["cbrn_proofing", cbrn_vebiclesHash getOrDefault [typeOf _vehicle, 0], true];
+        }, false, [], true]call CBA_fnc_addClassEventHandler;
+    } forEach cbrn_vehicles;
 };
+
+["DeconShower_01_F", "initPost",{
+    (_this select 0) call cbrn_fnc_setUpDeconShower;
+}, false, [], true]call CBA_fnc_addClassEventHandler;
 
 if !(hasInterface) exitWith {};
 
@@ -32,95 +51,9 @@ if (isNil "cbrn_mask_damage") then {
 };
 
 cbrn_loadouteh = ["cba_events_loadoutEvent",{
-    params ["_unit", "_oldLoadout"];
-    if (_unit != player) exitWith {};
-    private _goggles = goggles _unit;
-    private _backpack = backpack _unit;
-    private _uniform = uniform _unit;
-
-    private _hasMask = (cbrn_masks findIf {_x isEqualTo _goggles}) > -1;
-    if (!(_unit getVariable ["cbrn_mask_on", false]) && {_hasMask}) then {
-        // guy JUST put that mask on
-        _unit setVariable ["cbrn_mask_on", true, true];
-        cbrn_mask_abberation ppEffectEnable true;
-        cbrn_mask_abberation ppEffectAdjust [0.005,0.005,true];
-        cbrn_mask_abberation ppEffectCommit 1;
-
-        "cbrn_gasmask_overlay" cutRsc ["cbrn_gasmask", "PLAIN", 1, false];
-        cbrn_breath_handle = [_unit] spawn {
-            params ["_unit"];
-            private _fat = 0;
-            while{alive _unit && _unit getVariable ["cbrn_mask_on", false]} do {
-                _fat = [_unit] call cbrn_fnc_getFatigue;
-                sleep (0.75 + (3 - (3 * _fat)) + (random (2 - (2 * _fat))));
-                if !(alive _unit && _unit getVariable ["cbrn_mask_on", false]) exitWith {};
-                playSound format ["gas_breath_in_%1", floor (random 4) + 1];
-                _fat = [_unit] call cbrn_fnc_getFatigue;
-                sleep (0.75 + (2 - (2 * _fat)) + (random (2 - (2 * _fat))));
-                if !(alive _unit && _unit getVariable ["cbrn_mask_on", false]) exitWith {};
-                playSound format ["gas_breath_out_%1", floor (random 4) + 1];
-            };
-        };
-    };
-    if (_unit getVariable ["cbrn_mask_on", false] && {!_hasMask}) then {
-        // guy JUST put that mask away
-        _unit setVariable ["cbrn_mask_on", false, true];
-        cbrn_mask_abberation ppEffectEnable true;
-        cbrn_mask_abberation ppEffectAdjust [0,0,true];
-        cbrn_mask_abberation ppEffectCommit 1;
-        "cbrn_gasmask_overlay" cutFadeOut 1;
-        terminate cbrn_breath_handle;
-    };
-
-    private _hasBackpack = (cbrn_backpacks findIf {_x isEqualTo _backpack}) > -1;
-    if (!(_unit getVariable ["cbrn_backpack_on", false]) && {_hasBackpack}) then {
-        _unit setVariable ["cbrn_backpack_on", true, true];
-    };
-    if (_unit getVariable ["cbrn_backpack_on", false] && {!_hasBackpack}) then {
-        _unit setVariable ["cbrn_backpack_on", false, true];
-    };
-
-    private _hasThreatMeter = [_unit, cbrn_threatMeteritem] call ace_common_fnc_hasItem;
-    if (!(_unit getVariable ["cbrn_hasThreatMeter", false]) && {_hasThreatMeter}) then {
-        _unit setVariable ["cbrn_hasThreatMeter", true, true];
-    };
-    if (_unit getVariable ["cbrn_hasThreatMeter", false] && {!_hasThreatMeter}) then {
-        _unit setVariable ["cbrn_hasThreatMeter", false, true];
-        if (_unit getVariable ["cbrn_using_threat_meter", false]) then {
-            _unit setVariable ["cbrn_using_threat_meter", false, true];
-        };
-    };
-
-    private _hasSuit = (cbrn_suits findIf {_x isEqualTo _uniform}) > -1;
-    if (!(_unit getVariable ["cbrn_hasSuite", false]) && {_hasSuit}) then {
-        _unit setVariable ["cbrn_hasSuite", true, true];
-    };
-    if (_unit getVariable ["cbrn_hasSuite", false] && {!_hasSuit}) then {
-        _unit setVariable ["cbrn_hasSuite", false, true];
-    };
-
-    private _backPackContainer = backpackContainer _unit;
-    if (_unit getVariable ["cbrn_backpack_on", false] && {_unit getVariable ["cbrn_mask_on", false]}) then {
-        // add hose
-        if !(_backPackContainer getVariable ["cbrn_hose_attached", false]) then {
-            _backPackContainer setVariable ["cbrn_hose_attached", true];
-
-            if (_goggles isEqualTo "G_RegulatorMask_F") then {
-                _backPackContainer setObjectTextureGlobal [2,"a3\supplies_f_enoch\bags\data\b_cur_01_co.paa"];
-            } else {
-                _backPackContainer setObjectTextureGlobal [1,"a3\supplies_f_enoch\bags\data\b_cur_01_co.paa"];
-                _backPackContainer setObjectTextureGlobal [3,"a3\supplies_f_enoch\bags\data\b_cur_01_co.paa"];
-            };
-        };
-    } else {
-        if (_backPackContainer getVariable ["cbrn_hose_attached", false]) then {
-            _backPackContainer setVariable ["cbrn_hose_attached", false];
-            _backPackContainer setObjectTextureGlobal [1,""];
-            _backPackContainer setObjectTextureGlobal [2,""];
-            _backPackContainer setObjectTextureGlobal [3,""];
-        };
-    };
+    call cbrn_fnc_loadoutEH;
 }] call CBA_fnc_addEventHandler;
+[player] call cbrn_fnc_loadoutEH;
 
 private _action = ["cbrn_turn_on_oxygen", "Turn on oxygen","",{
     [ace_player] call cbrn_fnc_startOxygen;
@@ -153,19 +86,18 @@ cbrn_threatPfh = [cbrn_fnc_threatPFH, 0.5, [cba_missiontime]] call CBA_fnc_addPe
 cbrn_beepPfh = -1;
 
 [{
-    private _player = ace_player;
-    private _range = missionNameSpace getVariable ["cbrn_zoneSimulationRange", 500];
+    private _range = (missionNameSpace getVariable ["cbrn_zoneSimulationRange", 500]) / 2;
+    private _activateZones = cbrn_localZones inAreaArray [getPosWorld ace_player, _range, _range, 0 ,false, -1];
     {
-        if ((_player distance2D _x) < _range) then {
-            if !(simulationEnabled _x) then {
-                _x enableSimulation true;
-            };
-        } else {
-            if (simulationEnabled _x) then {
-                _x enableSimulation false;
-            };
+        if !(simulationEnabled _x) then {
+            _x enableSimulation true;
         };
-    } forEach cbrn_localZones;
+    } forEach _activateZones;
+    {
+        if (simulationEnabled _x) then {
+            _x enableSimulation false;
+        };
+    } forEach (cbrn_localZones - _activateZones);
 }, 10] call CBA_fnc_addPerFrameHandler;
 
 player addEventHandler ["Killed", {
@@ -203,8 +135,24 @@ _action = ["cbrn_turn_check_damage", "Check CRBN Exposure","",{
     };
     titleText ["You are feeling <t color='#ff0000'>really fucking bad</t>! The end is near..." , "PLAIN DOWN", -1, false, true];
 },{true},{},[], [0,0,0], 3] call ace_interact_menu_fnc_createAction;
-["CAManBase", 1, ["ACE_SelfActions","Medical"], _action, true] call ace_interact_menu_fnc_addActionToClass;
-["CAManBase", 1, ["ACE_SelfActions","ACE_Medical"], _action, true] call ace_interact_menu_fnc_addActionToClass;
+
+private _aceMedicalLoaded = isClass (configFile >> "CfgPatches" >> "ace_medical");
+private _newAceMedicalLoaded = isClass (configFile >> "CfgPatches" >> "ace_medical_statemachine");
+
+// no ace medical
+if (!_aceMedicalLoaded && {!_newAceMedicalLoaded}) then {
+    ["CAManBase", 1, ["ACE_SelfActions"], _action, true] call ace_interact_menu_fnc_addActionToClass;
+};
+
+// old ace medical
+if (_aceMedicalLoaded && {!_newAceMedicalLoaded}) then {
+    ["CAManBase", 1, ["ACE_SelfActions","Medical"], _action, true] call ace_interact_menu_fnc_addActionToClass;
+};
+
+// new ace medical
+if (_aceMedicalLoaded && {_newAceMedicalLoaded}) then {
+    ["CAManBase", 1, ["ACE_SelfActions","ACE_Medical"], _action, true] call ace_interact_menu_fnc_addActionToClass;
+};
 
 _action = ["cbrn_turn_on_threatmeter", "Turn on threatmeter","",{
     ace_player setVariable ["cbrn_using_threat_meter", true, true];

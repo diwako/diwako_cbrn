@@ -5,7 +5,7 @@ private _actualThreat = _threadLevel;
 private _curDamage = _unit getVariable ["cbrn_damage", 0];
 private _maxDamage = cbrn_maxDamage;
 
-if ((_curDamage / _maxDamage) > 0.5 && {!(_unit getVariable ["cbrn_autoDamage", false])}) then {
+if (cbrn_allowPassiveDamage && {(_curDamage / _maxDamage) > 0.5 && {!(_unit getVariable ["cbrn_autoDamage", false])}}) then {
     _unit setVariable ["cbrn_autoDamage", true];
     "WARNING!" hintC ["Your CBRN exposure is now rising automatically!!","SEEK DECONTAMINATION IMMIDIATELY!!","FIND DECONTAMINATION SHOWERS!"];
     [{
@@ -23,6 +23,12 @@ if ((_curDamage / _maxDamage) > 0.5 && {!(_unit getVariable ["cbrn_autoDamage", 
             _unit setDamage 1;
         };
     }, 1, [_unit]] call CBA_fnc_addPerFrameHandler;
+};
+
+// subtract vehicle proofing
+private _vehicle = vehicle _unit;
+if (_vehicle isNotEqualTo _unit) then {
+    _actualThreat = _actualThreat - (_vehicle getVariable ["cbrn_proofing", 0]);
 };
 
 if (_threadLevel >= 1) then {
@@ -61,7 +67,6 @@ if (alive _unit && {_curDamage > _maxDamage}) exitWith {
     _unit setDamage 1;
 };
 
-
 cbrn_mask_damage ppEffectAdjust [_effectStrength, _effectStrength, true];
 cbrn_mask_damage ppEffectCommit 5;
 
@@ -71,7 +76,9 @@ if (cba_missionTime > (_unit getVariable ["cbrn_nextCough", -1])) then {
     _unit setVariable ["cbrn_damage", _curDamage, true];
 };
 
-private _pain = _unit getVariable ["ace_medical_pain", 0];
-if (_pain < 1) then {
-    [_unit, 0.05 * _delta] call ace_medical_fnc_adjustPainLevel;
+if !(isNil "ace_medical_fnc_adjustPainLevel") then {
+    private _pain = _unit getVariable ["ace_medical_pain", 0];
+    if (_pain < 1) then {
+        [_unit, 0.05 * _delta] call ace_medical_fnc_adjustPainLevel;
+    };
 };

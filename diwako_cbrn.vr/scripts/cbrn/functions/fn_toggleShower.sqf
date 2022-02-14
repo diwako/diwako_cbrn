@@ -3,7 +3,7 @@ params ["_shower", ["_on", false]];
 if !(hasInterface) exitWith {};
 
 if (_on) then {
-    if (_shower getVariable ["cbrn_water", 120] isEqualTo 0) exitWith {};
+    if (_shower getVariable ["cbrn_water", cbrn_deconWaterTime] isEqualTo 0) exitWith {};
 
     private _particles    = [];
     private _power = 1.4;
@@ -44,7 +44,7 @@ if (_on) then {
     _sound setPosASL (getPosASLVisual _shower);
 
     private _trg = createTrigger ["EmptyDetector", getpos _shower, false];
-    // _trg setPosWorld getPosWorld _shower;
+    _trg setPosWorld ((getPosWorld _shower) vectorAdd [0,0,-1]);
     _trg setTriggerArea [1, 1, (getDir _shower), true, 1];
     _trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
     _trg setTriggerTimeout [5, 5, 5, true];

@@ -2,7 +2,8 @@ class cbrn{
     tag="cbrn";
     class functions{
         file = "scripts\cbrn\functions";
-        class init{postInit=1;};
+        class preInit{preInit=1;};
+        class postInit{postInit=1;};
         class startOxygen{};
         class addZone{};
         class createZone{};
@@ -13,5 +14,6 @@ class cbrn{
         class getFatigue{};
         class detectorBeepPFH{};
         class checkOxygen{};
+        class loadoutEH{};
     };
 };
