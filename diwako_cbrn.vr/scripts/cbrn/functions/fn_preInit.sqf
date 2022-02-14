@@ -13,8 +13,6 @@ cbrn_beep = true;
 ["cbrn_createZone", {
     params ["_pos", "_threatLevel", "_size", "_falloffArea", ["_trg", objNull]];
     if (isNull _trg) exitWith {};
-    _trg setVariable ["cbrn_threatLevel", _threatLevel];
-    _trg setVariable ["cbrn_size", _size];
     _trg setVariable ["cbrn_falloffArea", _falloffArea];
     private _radius = _size + _falloffArea;
     _trg setTriggerArea [_radius, _radius, 0, false, _radius];

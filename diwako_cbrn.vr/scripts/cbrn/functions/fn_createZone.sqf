@@ -16,6 +16,8 @@ _pos = _pos call CBA_fnc_getPos;
 private _trg = createTrigger ["EmptyDetector", _pos, true];
 _trg setVariable ["cbrn_active", true, true];
 _trg setVariable ["cbrn_zone", true, true];
+_trg setVariable ["cbrn_threatLevel", _threatLevel, true];
+_trg setVariable ["cbrn_size", _size, true];
 _trg enableDynamicSimulation false;
 
 ["cbrn_createZone", [_pos, _threatLevel, _size, _falloffArea, _trg]] call CBA_fnc_globalEventJip;
