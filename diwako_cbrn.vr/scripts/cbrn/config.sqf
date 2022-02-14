@@ -42,7 +42,8 @@ cbrn_deconWaterTime = 60 * 2;
 cbrn_healingRate = 0;
 
 // configure vehicles to be CBRN proof
-// list of arrays, first entry vehicle class, second entry amount of proofing. The amount is the same measurement as zone threat levels
+// list of arrays, first entry vehicle class or 3den editor object name as string, second entry amount of proofing. The amount is the same measurement as zone threat levels
 cbrn_vehicles = [
-    ["B_MRAP_01_F", 5]
+    ["vroomvroom", 5],
+    ["B_Quadbike_01_F", 1]
 ];

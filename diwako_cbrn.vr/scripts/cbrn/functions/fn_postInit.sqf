@@ -1,8 +1,16 @@
 if (isServer) then {
     publicVariable "cbrn_zoneSimulationRange";
+    cbrn_vehicles = cbrn_vehicles apply {
+        _x params [["_obj", "nothing", [""]], "_value"];
+        _obj = missionNamespace getVariable [_obj, _obj];
+        if !(_obj isEqualType "") then {
+            _obj = typeOf _obj;
+        };
+        [_obj, _value]
+    };
     cbrn_vebiclesHash = createHashMapFromArray cbrn_vehicles;
     {
-        _x params ["_class", ["_amount", 0, [0]]];
+        _x params ["_class"];
         [_class, "initPost",{
             params ["_vehicle"];
             _vehicle setVariable ["cbrn_proofing", cbrn_vebiclesHash getOrDefault [typeOf _vehicle, 0], true];

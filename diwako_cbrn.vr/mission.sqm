@@ -8,7 +8,7 @@ class EditorData
 	toggles=545;
 	class ItemIDProvider
 	{
-		nextID=14;
+		nextID=15;
 	};
 	class MarkerIDProvider
 	{
@@ -17,8 +17,8 @@ class EditorData
 	class Camera
 	{
 		pos[]={99.622688,8.0878487,38.656677};
-		dir[]={0.040289722,-0.2684398,0.96245366};
-		up[]={0.011227452,0.96329647,0.26820493};
+		dir[]={0.040289722,-0.26843977,0.96245366};
+		up[]={0.01122745,0.96329647,0.2682049};
 		aside[]={0.99912506,0,-0.04182484};
 	};
 };
@@ -45,7 +45,8 @@ addons[]=
 	"A3_Ui_F",
 	"A3_Supplies_F_Enoch_Ammoboxes",
 	"A3_Props_F_Enoch_Military_Decontamination",
-	"A3_Soft_F_MRAP_01"
+	"A3_Soft_F_MRAP_01",
+	"A3_Soft_F_Quadbike_01"
 };
 class AddonsMetaData
 {
@@ -191,7 +192,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=13;
+		items=14;
 		class Item0
 		{
 			dataType="Group";
@@ -493,15 +494,49 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={103.58358,7.2059455,48.471394};
+				position[]={103.584,7.2059455,48.471436};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				name="vroomvroom";
+			};
+			id=13;
+			type="B_MRAP_01_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="ammoBox";
+					expression="[_this,_value] call bis_fnc_initAmmoBox;";
+					class Value
+					{
+						class data
+						{
+							singleType="STRING";
+							value="[[[[""arifle_MX_F"",""FirstAidKit""],[2,10]],[[""30Rnd_65x39_caseless_mag"",""100Rnd_65x39_caseless_mag"",""HandGrenade"",""1Rnd_HE_Grenade_shell"",""1Rnd_Smoke_Grenade_shell"",""1Rnd_SmokeGreen_Grenade_shell"",""1Rnd_SmokeOrange_Grenade_shell"",""1Rnd_SmokeBlue_Grenade_shell"",""16Rnd_9x21_Mag"",""SmokeShell"",""SmokeShellGreen"",""SmokeShellOrange"",""SmokeShellBlue"",""NLAW_F""],[16,6,10,10,4,4,4,4,12,4,4,4,4,2]],[[],[]],[[],[]]],false]";
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item13
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={98.355469,6.6262865,44.390728};
+				angles[]={-0,6.2657323,0};
 			};
 			side="Empty";
 			flags=4;
 			class Attributes
 			{
 			};
-			id=13;
-			type="B_MRAP_01_F";
+			id=14;
+			type="B_Quadbike_01_F";
 		};
 	};
 };

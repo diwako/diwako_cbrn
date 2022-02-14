@@ -109,7 +109,7 @@ Float, rate how much of the exposure damage is healed each second. **Healing is 
 
 ### cbrn_vehicles
 
-List of vehicle and proofing value pairs. First entry of a pair is the vehicle class, second entry is the proofing values, same measurements as threatlevel.
+List of vehicle and proofing value pairs. First entry of a pair is the vehicle class or 3den object name as string, second entry is the proofing values, same measurements as threatlevel.
 
 ## Links
 
