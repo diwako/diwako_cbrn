@@ -25,27 +25,28 @@ class cbrn_gasmask {
 };
 
 class cbrn_fog {
-	idd = -2;
+	idd = 1000;
 	movingEnable = false;
     duration = 999999;
-    onLoad = "";
+    onLoad = "cbrn_fogDisplay = _this"
     controlsBackground[] = {overlay};
     objects[] = {};
-    controls[] = {};
-	
-	   class overlay {
-        idc = 1336;
-        type = 0;
-        style = 48;
-        colorBackground[] = { };
-        colorText[] = { };
-        font = "PuristaMedium";
-        sizeEx = 1.0;
-        moving = false;
-        x = safeZoneXAbs;
-        y = SafeZoneY - safeZoneH / 4;
-        w = safeZoneWAbs;
-        h = safeZoneH * 1.5;
-        text = "scripts\cbrn\images\fog_overlay.paa";
-    };
-}
+    //controls[] = {};
+	//class Controls {
+		class overlay {
+			idc = 1336;
+			type = 0;
+			style = 48;
+			colorBackground[] = { };
+			colorText[] = { 1,1,1,0 };
+			font = "PuristaMedium";
+			sizeEx = 1.0;
+			moving = false;
+			x = safeZoneXAbs;
+			y = SafeZoneY - safeZoneH / 4;
+			w = safeZoneWAbs;
+			h = safeZoneH * 1.5;
+			text = "scripts\cbrn\images\fog_overlay.paa";
+		};
+	//};
+};

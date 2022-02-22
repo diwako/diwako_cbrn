@@ -2,7 +2,11 @@
 cbrn_maxDamage = 100;
 
 // backpacks considered oxygen tanks
-cbrn_backpacks = ["B_SCBA_01_F"];
+cbrn_backpacks = ["B_SCBA_01_F",
+	"B_CombinationUnitRespirator_01_F"];
+
+// backpacks considered air conditioners; help reduce fogging
+cbrn_conditioning = ["B_CombinationUnitRespirator_01_F"];
 
 // uniforms considered CBRN suits
 cbrn_suits = ["U_C_CBRN_Suit_01_Blue_F",
@@ -30,7 +34,7 @@ cbrn_masks = ["G_AirPurifyingRespirator_02_black_F",
 cbrn_threatMeteritem = "ACE_microDAGR";
 
 // after how much time does the air run out in an oxygen tank (in seconds!)
-cbrn_maxOxygenTime = 60;
+cbrn_maxOxygenTime = 60 * 30;
 
 // should auto damage occur after 50% damage threshold has been reached?
 cbrn_allowPassiveDamage = true;
@@ -42,15 +46,16 @@ cbrn_deconWaterTime = 60 * 2;
 cbrn_healingRate = 0;
 
 // FOG SETTINGS
+// enables or disables fogging entirely
 cbrn_foggingEnabled = true;
 // maximum time after which the gas mask starts fogging up; default 5 mins
-//cbrn_fogStartTime = 60 * 5;
-cbrn_fogStartTime = 2;
+cbrn_fogStartTime = 5;
 // maximum time after which the gas mask is fully fogged up; default 10 mins
-//cbrn_fogMaxTime = 60 * 10;
 cbrn_fogMaxTime = 10;
-// fog fading coefficient; is used in multiplicator with the frame-time delta in fogPFH; higher means fog will fade faster; default 20
-cbrn_fogFadeCoef = 20;
+// fog accumulation coefficient; used in multiplication with the frame-time delta in fogPFH; lower means fogging accumulates slower, 0 stops it entirely; default 0.5
+cbrn_fogAccumulationCoef = 0.5;
+// fog fading coefficient; is used in multiplication with the frame-time delta in fogPFH; higher means fog will fade faster; default 5
+cbrn_fogFadeCoef = 5;
 
 cbrn_fogDelta = cbrn_fogMaxTime - cbrn_fogStartTime;
 
