@@ -41,10 +41,20 @@ cbrn_deconWaterTime = 60 * 2;
 // healing rate for each second, does nothing if 0 or below, or player while player is experiencing passive contamination
 cbrn_healingRate = 0;
 
-// maximum time after which the gas mask starts fogging up
-cbrn_fogStartTime = 60 * 5;
-// maximum time after which the gas mask is fully fogged up
-cbrn_fogMaxTime = 60 * 10;
+// FOG SETTINGS
+cbrn_foggingEnabled = true;
+// maximum time after which the gas mask starts fogging up; default 5 mins
+//cbrn_fogStartTime = 60 * 5;
+cbrn_fogStartTime = 2;
+// maximum time after which the gas mask is fully fogged up; default 10 mins
+//cbrn_fogMaxTime = 60 * 10;
+cbrn_fogMaxTime = 10;
+// fog fading coefficient; is used in multiplicator with the frame-time delta in fogPFH; higher means fog will fade faster; default 20
+cbrn_fogFadeCoef = 20;
+
+cbrn_fogDelta = cbrn_fogMaxTime - cbrn_fogStartTime;
+
+
 
 // configure vehicles to be CBRN proof
 // list of arrays, first entry vehicle class or 3den editor object name as string, second entry amount of proofing. The amount is the same measurement as zone threat levels

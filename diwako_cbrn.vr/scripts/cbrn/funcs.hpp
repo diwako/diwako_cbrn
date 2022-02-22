@@ -15,5 +15,6 @@ class cbrn{
         class detectorBeepPFH{};
         class checkOxygen{};
         class loadoutEH{};
+		class fogPFH{};
     };
 };
