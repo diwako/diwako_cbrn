@@ -78,14 +78,15 @@ if (_player getVariable ["cbrn_using_threat_meter", false]) then {
     ctrlDelete (uiNamespace getVariable ["cbrn_threatOverlayCtrl", ctrlNull]);
 };
 
-private _hasChemDetector = "ChemicalDetector_01_watch_F" in (assignedItems _player);
-if (_hasChemDetector && {visibleWatch}) then {
+private _hasChemDetector = cbrn_threatMeteritem in (items _player);
+
+/*if (_hasChemDetector && {visibleWatch}) then {
     private _ui = uiNamespace getVariable ["RscWeaponChemicalDetector", displayNull];
     if !(isNull _ui) then {
         private _obj = _ui displayCtrl 101;
         _obj ctrlAnimateModel ["Threat_Level_Source", (_max - 0.05 + (random 0.1)) max 0, true];
     };
-};
+};*/
 
 if (_hasChemDetector isNotEqualTo (_player getVariable ["cbrn_detector_beeps", false]))then {
     _player setVariable ["cbrn_detector_beeps", _hasChemDetector];

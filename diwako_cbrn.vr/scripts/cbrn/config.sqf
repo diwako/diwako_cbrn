@@ -30,7 +30,7 @@ cbrn_masks = ["G_AirPurifyingRespirator_02_black_F",
 cbrn_threatMeteritem = "ACE_microDAGR";
 
 // after how much time does the air run out in an oxygen tank (in seconds!)
-cbrn_maxOxygenTime = 60 * 30;
+cbrn_maxOxygenTime = 60;
 
 // should auto damage occur after 50% damage threshold has been reached?
 cbrn_allowPassiveDamage = true;
@@ -40,6 +40,11 @@ cbrn_deconWaterTime = 60 * 2;
 
 // healing rate for each second, does nothing if 0 or below, or player while player is experiencing passive contamination
 cbrn_healingRate = 0;
+
+// maximum time after which the gas mask starts fogging up
+cbrn_fogStartTime = 60 * 5;
+// maximum time after which the gas mask is fully fogged up
+cbrn_fogMaxTime = 60 * 10;
 
 // configure vehicles to be CBRN proof
 // list of arrays, first entry vehicle class or 3den editor object name as string, second entry amount of proofing. The amount is the same measurement as zone threat levels

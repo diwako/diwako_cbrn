@@ -209,6 +209,7 @@ if !(isNil "CBA_fnc_addItemContextMenuOption") then {
         }, false] call CBA_fnc_addItemContextMenuOption;
     } forEach cbrn_backpacks;
 
+	
     ["ChemicalDetector_01_watch_F", "WATCH", "Increase volume", nil, nil,
     [{cbrn_beepVolume < 5},{cbrn_beep}], {
         cbrn_beepVolume = cbrn_beepVolume + 1;
@@ -229,6 +230,31 @@ if !(isNil "CBA_fnc_addItemContextMenuOption") then {
     }, false] call CBA_fnc_addItemContextMenuOption;
 
     ["ChemicalDetector_01_watch_F", "WATCH", "Turn beeping off", nil, nil,
+    [{cbrn_beep},{cbrn_beep}], {
+        cbrn_beep = false;
+        false
+    }, false] call CBA_fnc_addItemContextMenuOption;
+	
+	[cbrn_threatMeteritem, "CONTAINER", "Increase volume", nil, nil,
+    [{cbrn_beepVolume < 5},{cbrn_beep}], {
+        cbrn_beepVolume = cbrn_beepVolume + 1;
+        false
+    }, false] call CBA_fnc_addItemContextMenuOption;
+
+    [cbrn_threatMeteritem, "CONTAINER", "Decrease volume", nil, nil,
+    [{cbrn_beepVolume > 0},{cbrn_beep}], {
+        cbrn_beepVolume = cbrn_beepVolume - 1;
+        false
+    }, false] call CBA_fnc_addItemContextMenuOption;
+	
+	[cbrn_threatMeteritem, "CONTAINER", "Turn beeping on", nil, nil,
+    [{!cbrn_beep},{!cbrn_beep}], {
+        cbrn_beep = true;
+        cbrn_beepPfh = [cbrn_fnc_detectorBeepPFH, 0.05, [cba_missiontime]] call CBA_fnc_addPerFrameHandler;
+        false
+    }, false] call CBA_fnc_addItemContextMenuOption;
+	
+	[cbrn_threatMeteritem, "CONTAINER", "Turn beeping off", nil, nil,
     [{cbrn_beep},{cbrn_beep}], {
         cbrn_beep = false;
         false
