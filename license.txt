@@ -1,7 +1,7 @@
-Original Copyright 2022 diwako
+Original Copyright 2020-2022 diwako
 Adaptions 2022 Snick0rz/Celene 
 
-This work is a derivitive of work (diwako_cbrn) that uses the license Arma Public License Share Alike (APL-SA)
+This work is a derivitive of the work diwako_cbrn by diwako that uses the license Arma Public License Share Alike (APL-SA); as per the license, this work is also licensed under the APL-SA license.
 
 https://www.bohemia.net/community/licenses/arma-public-license-share-alike
 
