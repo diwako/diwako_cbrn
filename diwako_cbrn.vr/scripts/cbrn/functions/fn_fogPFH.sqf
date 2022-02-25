@@ -11,6 +11,13 @@ _args set [0, _time];
 private _uptime = _player getVariable ["cbrn_mask_uptime", 0];
 private _fogging = _player getVariable ["cbrn_mask_fogging", false];
 
+private _fatigue = _player call cbrn_fnc_getFatigue;
+private _fatigueAdditive = 0;
+
+if (cbrn_fogFatigueEnabled) then {
+	_fatigueAdditive = ( _fatigue * cbrn_fogFatigueCoef ) * _delta;
+};
+
 if (_player getVariable["cbrn_mask_on", false]) then {
 
 private _backpack = backpack _player;
@@ -19,10 +26,10 @@ private _unitHasAC = _backpack in cbrn_conditioning;
 private _newUptime = 0;
 
 if ( _unitHasAC ) then {
-	_newUptime = _uptime + (_delta * cbrn_fogAccumulationCoef);
-	} else {
-	_newUptime = _uptime + _delta;
-	};
+	_newUptime = _uptime + ( ( _delta * cbrn_fogAccumulationCoef ) + _fatigueAdditive );
+} else {
+	_newUptime = _uptime + ( _delta + _fatigueAdditive );
+};
 
 _player setVariable["cbrn_mask_uptime", _newUptime];
 
@@ -30,7 +37,6 @@ if (_newUptime > cbrn_fogStartTime) then {
 	if !(_fogging) then {
 		_player setVariable["cbrn_mask_fogging", true];
 	};
-		
 	private _control = cbrn_fogDisplay select 0 displayCtrl 1336;
 	
 	private _convertedAlpha = linearConversion [cbrn_fogStartTime, cbrn_fogMaxTime, _newUptime, 0, 1, true];

@@ -42,7 +42,6 @@ if (_unit getVariable ["cbrn_mask_on", false] && {!_hasMask}) then {
     cbrn_mask_abberation ppEffectAdjust [0,0,true];
     cbrn_mask_abberation ppEffectCommit 1;
     "cbrn_gasmask_overlay" cutFadeOut 1;
-	//"cbrn_gasmask_fog" cutRsc ["RscTitleDisplayEmpty", "PLAIN", 1];
 	"cbrn_gasmask_fog" cutFadeOut 1;
     terminate cbrn_breath_handle;
 };

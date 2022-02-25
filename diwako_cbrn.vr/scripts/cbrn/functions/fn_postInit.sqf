@@ -84,6 +84,7 @@ _action = ["cbrn_check_oxygen", "Check remaining oxygen","",{
 "ChemiCalDetector" cutRsc ["RscWeaponChemicalDetector", "PLAIN", 1, false];
 cbrn_threatPfh = [cbrn_fnc_threatPFH, 0.5, [cba_missiontime]] call CBA_fnc_addPerFrameHandler;
 cbrn_beepPfh = -1;
+cbrn_geigerPfh = -1;
 
 [{
     private _range = (missionNameSpace getVariable ["cbrn_zoneSimulationRange", 500]) / 2;
@@ -235,28 +236,29 @@ if !(isNil "CBA_fnc_addItemContextMenuOption") then {
         false
     }, false] call CBA_fnc_addItemContextMenuOption;
 	
-	[cbrn_threatMeteritem, "CONTAINER", "Increase volume", nil, nil,
+	
+	/*[cbrn_threatGeiger, "CONTAINER", "Increase volume", nil, nil,
     [{cbrn_beepVolume < 5},{cbrn_beep}], {
         cbrn_beepVolume = cbrn_beepVolume + 1;
         false
     }, false] call CBA_fnc_addItemContextMenuOption;
 
-    [cbrn_threatMeteritem, "CONTAINER", "Decrease volume", nil, nil,
+    [cbrn_threatGeiger, "CONTAINER", "Decrease volume", nil, nil,
     [{cbrn_beepVolume > 0},{cbrn_beep}], {
         cbrn_beepVolume = cbrn_beepVolume - 1;
         false
-    }, false] call CBA_fnc_addItemContextMenuOption;
+    }, false] call CBA_fnc_addItemContextMenuOption;*/
 	
-	[cbrn_threatMeteritem, "CONTAINER", "Turn beeping on", nil, nil,
-    [{!cbrn_beep},{!cbrn_beep}], {
-        cbrn_beep = true;
-        cbrn_beepPfh = [cbrn_fnc_detectorBeepPFH, 0.05, [cba_missiontime]] call CBA_fnc_addPerFrameHandler;
+	[cbrn_threatGeiger, "CONTAINER", "Turn counter on", nil, nil,
+    [{!cbrn_geiger},{!cbrn_geiger}], {
+        cbrn_geiger = true;
+        cbrn_geigerPfh = [cbrn_fnc_detectorGeigerPFH, 0.05, [cba_missiontime]] call CBA_fnc_addPerFrameHandler;
         false
     }, false] call CBA_fnc_addItemContextMenuOption;
 	
-	[cbrn_threatMeteritem, "CONTAINER", "Turn beeping off", nil, nil,
-    [{cbrn_beep},{cbrn_beep}], {
-        cbrn_beep = false;
+	[cbrn_threatGeiger, "CONTAINER", "Turn counter off", nil, nil,
+    [{cbrn_geiger},{cbrn_geiger}], {
+        cbrn_geiger = false;
         false
     }, false] call CBA_fnc_addItemContextMenuOption;
 

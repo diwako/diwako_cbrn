@@ -78,15 +78,20 @@ if (_player getVariable ["cbrn_using_threat_meter", false]) then {
     ctrlDelete (uiNamespace getVariable ["cbrn_threatOverlayCtrl", ctrlNull]);
 };
 
-private _hasChemDetector = cbrn_threatMeteritem in (items _player);
+private _hasChemDetector = "ChemicalDetector_01_watch_F" in (assignedItems _player);
+private _hasGeigerCounter = cbrn_threatGeiger in (items _player); 
 
-/*if (_hasChemDetector && {visibleWatch}) then {
+if (_hasChemDetector && {visibleWatch}) then {
     private _ui = uiNamespace getVariable ["RscWeaponChemicalDetector", displayNull];
     if !(isNull _ui) then {
         private _obj = _ui displayCtrl 101;
         _obj ctrlAnimateModel ["Threat_Level_Source", (_max - 0.05 + (random 0.1)) max 0, true];
     };
-};*/
+};
+
+/*private _hasSoundDetector = false;
+private _hasBeeper = false;
+private _hasGeiger = false;*/
 
 if (_hasChemDetector isNotEqualTo (_player getVariable ["cbrn_detector_beeps", false]))then {
     _player setVariable ["cbrn_detector_beeps", _hasChemDetector];
@@ -94,6 +99,14 @@ if (_hasChemDetector isNotEqualTo (_player getVariable ["cbrn_detector_beeps", f
         cbrn_beepPfh = [cbrn_fnc_detectorBeepPFH, 0.05, [cba_missiontime]] call CBA_fnc_addPerFrameHandler;
     };
 };
+
+if (_hasGeigerCounter isNotEqualTo (_player getVariable ["cbrn_detector_geiger", false])) then {
+	_player setVariable ["cbrn_detector_geiger", _hasGeigerCounter];
+	if (cbrn_geiger && {cbrn_geigerPfh < 0}) then {
+        cbrn_geigerPfh = [cbrn_fnc_detectorGeigerPFH, 0.05, [cba_missiontime]] call CBA_fnc_addPerFrameHandler;
+    };
+};
+
 
 if (!(_player getVariable ["cbrn_autoDamage", false]) && {cbrn_healingRate > 0}) then {
     private _curDamage = _player getVariable ["cbrn_damage", 0];
