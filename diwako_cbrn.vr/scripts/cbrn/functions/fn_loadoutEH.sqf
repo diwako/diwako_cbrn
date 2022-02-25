@@ -12,11 +12,6 @@ if (!(_unit getVariable ["cbrn_mask_on", false]) && {_hasMask}) then {
     cbrn_mask_abberation ppEffectAdjust [0.005,0.005,true];
     cbrn_mask_abberation ppEffectCommit 1;
 	
-	if(cbrn_foggingEnabled && isNil "cbrn_fogPfh") then {
-		"cbrn_gasmask_fog" cutRsc ["cbrn_fog", "PLAIN", 0, false];
-		cbrn_fogPfh = [cbrn_fnc_fogPFH, 0.05, [cba_missiontime]] call CBA_fnc_addPerFrameHandler;
-	};
-	
     "cbrn_gasmask_overlay" cutRsc ["cbrn_gasmask", "PLAIN", 1, false];
     cbrn_breath_handle = [_unit] spawn {
         params ["_unit"];

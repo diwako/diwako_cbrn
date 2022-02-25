@@ -79,7 +79,7 @@ if (_player getVariable ["cbrn_using_threat_meter", false]) then {
 };
 
 private _hasChemDetector = "ChemicalDetector_01_watch_F" in (assignedItems _player);
-private _hasGeigerCounter = cbrn_threatGeiger in (items _player); 
+private _hasGeigerCounter = [_player, cbrn_threatGeiger] call ace_common_fnc_hasItem;
 
 if (_hasChemDetector && {visibleWatch}) then {
     private _ui = uiNamespace getVariable ["RscWeaponChemicalDetector", displayNull];
