@@ -117,14 +117,22 @@ List of vehicle and proofing value pairs. First entry of a pair is the vehicle c
 This fork contains a few changes over the base version.
 All of these can be toggled off and much of it is customizable in the `config.sqf`.
 
+Quick overview of the additions:
+1. Mask fogging
+1.2 Air conditioning & fatigue
+2. Geiger counters
+
+
 ## Mask fogging
 
 The first and biggest change is the ability for masks to fog up. While wearing a mask, the framework tracks the time a player has worn a gas mask for.
-Once this uptime reaches the configurable point, a fog overlay starts being shown which increases in opacity until the uptime reaches the maximum time.
+After five minutes, the mask will start visibly fogging up until the uptime reaches ten minutes, at which the overlay will have reached full opacity.
 
 ![Demonstration of the fogging overlay at full opacity.](https://media.discordapp.net/attachments/945121539676856420/945773090296700968/unknown.png?width=1280&height=720)
 
-Taking the gas mask off causes the fog to fade over time; the rate is customizable.
+Taking the gas mask off causes the fog to fade over time. By default the mask airs out five times as quickly as it fogs up.
+
+The values for this are fully configurable in `config.sqf`. See the section below for a quick rundown of what they do!
 
 Related to this there are two other features, air conditioning and fatigue-related modifying of fogging speed.
 
