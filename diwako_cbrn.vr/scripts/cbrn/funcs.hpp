@@ -13,7 +13,9 @@ class cbrn{
         class setUpDeconShower{};
         class getFatigue{};
         class detectorBeepPFH{};
+        class detectorGeigerPFH{};
         class checkOxygen{};
         class loadoutEH{};
+		class fogPFH{};
     };
 };

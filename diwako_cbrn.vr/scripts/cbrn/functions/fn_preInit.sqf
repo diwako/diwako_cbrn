@@ -8,8 +8,10 @@ if !(hasInterface) exitWith {};
 cbrn_localZones = [];
 cbrn_curThreat = 0;
 cbrn_lastBeep = -1;
+cbrn_LastGeiger = -1;
 cbrn_beepVolume = 2;
 cbrn_beep = true;
+cbrn_geiger = true;
 ["cbrn_createZone", {
     params ["_pos", "_threatLevel", "_size", "_falloffArea", ["_trg", objNull]];
     if (isNull _trg) exitWith {};
