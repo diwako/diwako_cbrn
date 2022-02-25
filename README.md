@@ -77,7 +77,8 @@ Default: Array of all vanilla Gasmasks and some select mod ones
 
 Array of strings, warning: CaSeSeNsItiVe!\
 Array of backpacks which are to be considered oxygen tanks.\
-Default: Array containing only the self-contained oxygen tank
+Default: Array containing self-contained oxygen tank and combination respirator unit
+\[note: combination unit added by this fork]
 
 ### cbrn_suits
 
@@ -111,6 +112,82 @@ Float, rate how much of the exposure damage is healed each second. **Healing is 
 
 List of vehicle and proofing value pairs. First entry of a pair is the vehicle class or 3den object name as string, second entry is the proofing values, same measurements as threatlevel.
 
-## Changelog over default
+# Changelog over default
 
+This fork contains a few changes over the base version.
+All of these can be toggled off and much of it is customizable in the `config.sqf`.
 
+## Mask fogging
+
+The first and biggest change is the ability for masks to fog up. While wearing a mask, the framework tracks the time a player has worn a gas mask for.
+Once this uptime reaches the configurable point, a fog overlay starts being shown which increases in opacity until the uptime reaches the maximum time.
+
+![Demonstration of the fogging overlay at full opacity.](https://media.discordapp.net/attachments/945121539676856420/945773090296700968/unknown.png?width=1280&height=720)
+
+Taking the gas mask off causes the fog to fade over time; the rate is customizable.
+
+Related to this there are two other features, air conditioning and fatigue-related modifying of fogging speed.
+
+### Air conditioning & fatigue
+
+You can now define items as air conditioners - these items, when worn, can modify the accumulation of the fogging. By default, wearing such an item *halves* the accumulation of fog. By default the combination respirator is considered an air conditioner, in addition to it being considered a source of oxygen.
+
+If enabled, short term fatigue loss will cause masks to fog up far quicker. Depending on your settings, either the short term stamina of `ACE Advanced Fatigue` or the default ArmA 3 stamina bar will be used.
+The rate fatigue increases this accumulation is also customizable; by default fatigue can add up to a whole second per tick. This value however is also affected by the AC effect.
+
+## Geiger counters
+
+Also added was the ability to designate items as geiger counters. By default this behavior is added to the Micro DAGR, which now acts as a combination threatmeter and geiger counter, but as with the default framework, this is customizable by the user.
+
+Unlike the vanilla chemical detector, these play their sounds in 3D space and, of course, produce clicks instead of beeping.
+
+## New variables
+
+### template
+Datatype and what it does\
+short descriptor\
+default: true
+
+### cbrn_conditioning
+Array of strings, warning: CaSeSeNsItiVe!\
+Array of backpacks which are to be considered air conditioning units.\
+default: Combination Respirator Unit
+
+### cbrn_threatGeiger
+String of item name that should be considered as a geiger counter.\
+Default: "ACE_microDAGR"
+
+### cbrn_foggingEnabled
+Boolean, whether fogging should be enabled or not.\
+Disabling this disabled the whole fogging routine.\
+default: true
+
+### cbrn_fogStartTime
+Float, value after which the mask overlay starts being shown.\
+Once the mask uptime of a unit reaches this value, the fogging overlay will be created and slowly increase in opacity until the uptime reaches `cbrn_fogMaxTime`.\
+default: 5 minutes
+
+### cbrn_fogMaxTime
+Float, value after which the mask overlay is fully opaque.\
+Once the mask uptime of a unit reaches this value, the fogging overlay is shown in full opacity. The mask overlay has transparent areas and is **not** meant to completely block vision.\
+default: 5 minutes
+
+### cbrn_fogAccumulationCoef
+Float, value that modifies the fog accumulation when the unit is wearing a backpack considered to be an air conditioner.\
+Lower is better, values over 1 impact performance negatively and cause faster fog build up.\
+default: 0.5
+
+### cbrn_fogFadeCoef
+Float, value that modifies the fog fading when the unit has previously worn, but is no longer, wearing a gas mask.
+Higher is better.\
+default: 5
+
+### cbrn_fogFatigueEnabled
+Boolean, whether fatigue should contribute to fogging or not. Checks either against the ACE advanced fatigue system (if enabled) or the vanilla stamina system.\
+default: true
+
+### cbrn_fogFatigueCoef
+Float, value that modifies how much fatigue will cause the mask to fog up more.\
+Fatigue is returned in the range of 0 - 1; therefore a fatigue value of 1 and coefficient of 1 can add up to another second of uptime per second.\
+Higher makes fatigue build up far more fog, lower makes fatigue matter less in terms of fogging.\
+default: 1
