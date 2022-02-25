@@ -33,7 +33,6 @@ cbrn_masks = ["G_AirPurifyingRespirator_02_black_F",
 // Item that is considered a threat meter
 cbrn_threatMeteritem = "ACE_microDAGR";
 
-//cbrn_threatBeep = "ChemicalDetector_01_watch_F";
 cbrn_threatGeiger = "ACE_microDAGR";
 
 // after how much time does the air run out in an oxygen tank (in seconds!)

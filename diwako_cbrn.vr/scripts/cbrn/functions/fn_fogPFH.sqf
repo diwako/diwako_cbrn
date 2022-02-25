@@ -26,7 +26,7 @@ private _unitHasAC = _backpack in cbrn_conditioning;
 private _newUptime = 0;
 
 if ( _unitHasAC ) then {
-	_newUptime = _uptime + ( ( _delta * cbrn_fogAccumulationCoef ) + _fatigueAdditive );
+	_newUptime = _uptime + ( ( _delta + _fatigueAdditive ) * cbrn_fogAccumulationCoef );
 } else {
 	_newUptime = _uptime + ( _delta + _fatigueAdditive );
 };
