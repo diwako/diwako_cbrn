@@ -118,7 +118,7 @@ This fork contains a few changes over the base version.
 All of these can be toggled off and much of it is customizable in the `config.sqf`.
 
 Quick overview of the additions:
-1. Mask fogging
+1. Mask fogging  \
 1.2 Air conditioning & fatigue
 2. Geiger counters
 
