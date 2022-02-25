@@ -89,10 +89,6 @@ if (_hasChemDetector && {visibleWatch}) then {
     };
 };
 
-/*private _hasSoundDetector = false;
-private _hasBeeper = false;
-private _hasGeiger = false;*/
-
 if (_hasChemDetector isNotEqualTo (_player getVariable ["cbrn_detector_beeps", false]))then {
     _player setVariable ["cbrn_detector_beeps", _hasChemDetector];
     if (cbrn_beep && {cbrn_beepPfh < 0}) then {

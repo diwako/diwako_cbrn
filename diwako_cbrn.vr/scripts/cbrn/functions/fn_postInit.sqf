@@ -236,19 +236,6 @@ if !(isNil "CBA_fnc_addItemContextMenuOption") then {
         false
     }, false] call CBA_fnc_addItemContextMenuOption;
 	
-	
-	/*[cbrn_threatGeiger, "CONTAINER", "Increase volume", nil, nil,
-    [{cbrn_beepVolume < 5},{cbrn_beep}], {
-        cbrn_beepVolume = cbrn_beepVolume + 1;
-        false
-    }, false] call CBA_fnc_addItemContextMenuOption;
-
-    [cbrn_threatGeiger, "CONTAINER", "Decrease volume", nil, nil,
-    [{cbrn_beepVolume > 0},{cbrn_beep}], {
-        cbrn_beepVolume = cbrn_beepVolume - 1;
-        false
-    }, false] call CBA_fnc_addItemContextMenuOption;*/
-	
 	[cbrn_threatGeiger, "CONTAINER", "Turn counter on", nil, nil,
     [{!cbrn_geiger},{!cbrn_geiger}], {
         cbrn_geiger = true;
