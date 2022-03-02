@@ -9,6 +9,7 @@ cbrn_localZones = [];
 cbrn_curThreat = 0;
 cbrn_lastBeep = -1;
 cbrn_LastGeiger = -1;
+cbrn_soundNum = 0;
 cbrn_beepVolume = 2;
 cbrn_beep = true;
 cbrn_geiger = true;
