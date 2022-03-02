@@ -190,7 +190,7 @@ default: 1
 
 # Contributors
 
-diwako - Main dev
+diwako - Main dev\  
 Celene - Mask fogging, geiger type
 
 # Links
