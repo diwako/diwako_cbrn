@@ -4,15 +4,14 @@ _args params ["_lastIteration"];
 
 private _player = ace_player;
 
+private _time = cba_missiontime;
+private _delta = _time - _lastIteration;
+_args set [0, _time];
+	
+private _uptime = _player getVariable ["cbrn_mask_uptime", 0];
+private _fogging = _player getVariable ["cbrn_mask_fogging", false];
 
 if (_player getVariable["cbrn_mask_on", false]) then {
-
-	private _time = cba_missiontime;
-	private _delta = _time - _lastIteration;
-	_args set [0, _time];
-	
-	private _uptime = _player getVariable ["cbrn_mask_uptime", 0];
-	private _fogging = _player getVariable ["cbrn_mask_fogging", false];
 	
 	private _fatigue = _player call cbrn_fnc_getFatigue;
 	private _fatigueAdditive = 0;
