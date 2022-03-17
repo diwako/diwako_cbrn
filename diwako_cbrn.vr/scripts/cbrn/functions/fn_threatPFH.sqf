@@ -99,7 +99,7 @@ if (_hasChemDetector isNotEqualTo (_player getVariable ["cbrn_detector_beeps", f
 if (_hasGeigerCounter isNotEqualTo (_player getVariable ["cbrn_detector_geiger", false])) then {
 	_player setVariable ["cbrn_detector_geiger", _hasGeigerCounter];
 	if (cbrn_geiger && {cbrn_geigerPfh < 0}) then {
-        cbrn_geigerPfh = [cbrn_fnc_detectorGeigerPFH, 0.05, [cba_missiontime]] call CBA_fnc_addPerFrameHandler;
+        cbrn_geigerPfh = [cbrn_fnc_detectorGeigerPFH, 0.5, [cba_missiontime]] call CBA_fnc_addPerFrameHandler;
     };
 };
 
