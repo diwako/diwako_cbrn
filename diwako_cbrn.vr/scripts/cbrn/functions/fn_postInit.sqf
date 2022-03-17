@@ -1,6 +1,6 @@
 if (isServer) then {
     publicVariable "cbrn_zoneSimulationRange";
-    cbrn_vehicles = cbrn_vehicles apply {
+        cbrn_vehicles = cbrn_vehicles apply {
         _x params [["_obj", "nothing", [""]], "_value"];
         _obj = missionNamespace getVariable [_obj, _obj];
         if !(_obj isEqualType "") then {
@@ -10,7 +10,7 @@ if (isServer) then {
     };
     cbrn_vebiclesHash = createHashMapFromArray cbrn_vehicles;
     {
-        _x params ["_class"];
+    _x params ["_class"];
         [_class, "initPost",{
             params ["_vehicle"];
             _vehicle setVariable ["cbrn_proofing", cbrn_vebiclesHash getOrDefault [typeOf _vehicle, 0], true];
@@ -220,7 +220,7 @@ if !(isNil "CBA_fnc_addItemContextMenuOption") then {
         }, false] call CBA_fnc_addItemContextMenuOption;
     } forEach cbrn_backpacks;
 
-    
+
     ["ChemicalDetector_01_watch_F", "WATCH", "Increase volume", nil, nil,
     [{cbrn_beepVolume < 5},{cbrn_beep}], {
         cbrn_beepVolume = cbrn_beepVolume + 1;
@@ -245,14 +245,14 @@ if !(isNil "CBA_fnc_addItemContextMenuOption") then {
         cbrn_beep = false;
         false
     }, false] call CBA_fnc_addItemContextMenuOption;
-    
+
     [cbrn_threatGeiger, "CONTAINER", "Turn counter on", nil, nil,
     [{!cbrn_geiger},{!cbrn_geiger}], {
         cbrn_geiger = true;
-        cbrn_geigerPfh = [cbrn_fnc_detectorGeigerPFH, 0.05, [cba_missiontime]] call CBA_fnc_addPerFrameHandler;
+        cbrn_geigerPfh = [cbrn_fnc_detectorGeigerPFH, 0.5, [cba_missiontime]] call CBA_fnc_addPerFrameHandler;
         false
     }, false] call CBA_fnc_addItemContextMenuOption;
-    
+
     [cbrn_threatGeiger, "CONTAINER", "Turn counter off", nil, nil,
     [{cbrn_geiger},{cbrn_geiger}], {
         cbrn_geiger = false;
