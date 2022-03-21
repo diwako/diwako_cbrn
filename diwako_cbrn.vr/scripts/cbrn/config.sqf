@@ -3,7 +3,7 @@ cbrn_maxDamage = 100;
 
 // backpacks considered oxygen tanks
 cbrn_backpacks = ["B_SCBA_01_F",
-	"B_CombinationUnitRespirator_01_F"];
+    "B_CombinationUnitRespirator_01_F"];
 
 // backpacks considered air conditioners; help reduce fogging
 cbrn_conditioning = ["B_CombinationUnitRespirator_01_F"];
@@ -59,6 +59,8 @@ cbrn_fogMaxTime = 60 * 10;
 cbrn_fogAccumulationCoef = 0.5;
 // fog fading coefficient; is used in multiplication with the frame-time delta in fogPFH when the gasmask is taken off; higher means accumulated fog will fade faster; default 5
 cbrn_fogFadeCoef = 5;
+// max fog visibillity; value from 0 to 1, decimals allowed. Sets the maximum visibility of the fog layer; default 1
+cbrn_fogMaxAlpha = 1;
 
 // FATIGUE SETTINGS
 // whether or not fogging takes Fatigue into account

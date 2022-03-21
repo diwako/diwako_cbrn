@@ -16,6 +16,6 @@ class cbrn{
         class detectorGeigerPFH{};
         class checkOxygen{};
         class loadoutEH{};
-		class fogPFH{};
+        class fogPFH{};
     };
 };
