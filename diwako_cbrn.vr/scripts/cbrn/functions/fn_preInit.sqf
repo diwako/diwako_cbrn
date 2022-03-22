@@ -8,7 +8,6 @@ if !(hasInterface) exitWith {};
 cbrn_localZones = [];
 cbrn_curThreat = 0;
 cbrn_lastBeep = -1;
-cbrn_LastGeiger = -1;
 cbrn_soundNum = 0;
 cbrn_beepVolume = 2;
 cbrn_beep = true;
@@ -28,6 +27,7 @@ cbrn_geiger = true;
 if !(isNil "ace_nightvision") then {
     "ace_nightvision_display" cutFadeOut 0;
 };
+"cbrn_gasmask_fog" cutFadeOut 0;
 "cbrn_gasmask_overlay" cutFadeOut 0;
 if !(isNil "diwako_dui_radar") then {
     "diwako_dui_compass" cutFadeOut 0;

@@ -13,18 +13,15 @@ if ( !cbrn_geiger ||  {!(ace_player getVariable ["cbrn_detector_geiger", false])
 
 if (cbrn_curThreat < 0.25) exitWith {};
 
-if (cbrn_lastGeiger <= _time) then {
-    cbrn_lastGeiger = _time + 2;
-    private _soundPlayed = "cbrn_low_rad";
-    switch (true) do {
-        case (cbrn_curThreat > 3.25): { _soundPlayed = "cbrn_omg_rad" };
-        case (cbrn_curThreat > 2.75): { _soundPlayed = "cbrn_run_rad" };
-        case (cbrn_curThreat > 2.25): { _soundPlayed = "cbrn_deadly_rad" };
-        case (cbrn_curThreat > 1.75): { _soundPlayed = "cbrn_danger_rad" };
-        case (cbrn_curThreat > 1.25): { _soundPlayed = "cbrn_high_rad" };
-        case (cbrn_curThreat > 0.75): { _soundPlayed = "cbrn_mid_rad" };
-        default { };
-    };
-
-    [ace_player, _soundPlayed] remoteExec ["say3D"];
+private _soundPlayed = "cbrn_low_rad";
+switch (true) do {
+    case (cbrn_curThreat > 3.25): { _soundPlayed = "cbrn_omg_rad" };
+    case (cbrn_curThreat > 2.75): { _soundPlayed = "cbrn_run_rad" };
+    case (cbrn_curThreat > 2.25): { _soundPlayed = "cbrn_deadly_rad" };
+    case (cbrn_curThreat > 1.75): { _soundPlayed = "cbrn_danger_rad" };
+    case (cbrn_curThreat > 1.25): { _soundPlayed = "cbrn_high_rad" };
+    case (cbrn_curThreat > 0.75): { _soundPlayed = "cbrn_mid_rad" };
+    default { };
 };
+
+[ace_player, _soundPlayed] remoteExec ["say3D"];

@@ -249,7 +249,7 @@ if !(isNil "CBA_fnc_addItemContextMenuOption") then {
     [cbrn_threatGeiger, "CONTAINER", "Turn counter on", nil, nil,
     [{!cbrn_geiger},{!cbrn_geiger}], {
         cbrn_geiger = true;
-        cbrn_geigerPfh = [cbrn_fnc_detectorGeigerPFH, 0.5, [cba_missiontime]] call CBA_fnc_addPerFrameHandler;
+        cbrn_geigerPfh = [cbrn_fnc_detectorGeigerPFH, 2, [cba_missiontime]] call CBA_fnc_addPerFrameHandler;
         false
     }, false] call CBA_fnc_addItemContextMenuOption;
 
