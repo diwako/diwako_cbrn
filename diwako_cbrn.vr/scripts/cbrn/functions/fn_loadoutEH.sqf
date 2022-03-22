@@ -31,10 +31,13 @@ if (!(_unit getVariable ["cbrn_mask_on", false]) && {_hasMask}) then {
 if (_unit getVariable ["cbrn_mask_on", false] && {!_hasMask}) then {
     // guy JUST put that mask away
     _unit setVariable ["cbrn_mask_on", false, true];
+    _unit setVariable ["cbrn_mask_fogging", false];
+    _unit setVariable ["cbrn_mask_fogged", false];
     cbrn_mask_abberation ppEffectEnable true;
     cbrn_mask_abberation ppEffectAdjust [0,0,true];
     cbrn_mask_abberation ppEffectCommit 1;
     "cbrn_gasmask_overlay" cutFadeOut 1;
+    "cbrn_gasmask_fog" cutFadeOut 1;
     terminate cbrn_breath_handle;
 };
 

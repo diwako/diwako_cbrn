@@ -94,3 +94,45 @@ class detector_beep_5
     sound[] = {"scripts\cbrn\sounds\detectorbeep.ogg", 3, 1, 50};
     titles[]={};
 };
+class cbrn_low_rad
+{
+    name="cbrn_low_rad";
+    sound[] = {"scripts\cbrn\sounds\cbrn_low_rad.ogg", 1.5, 1, 50};
+    titles[] = {};
+};
+class cbrn_omg_rad
+{
+    name="cbrn_omg_rad";
+    sound[] = {"scripts\cbrn\sounds\cbrn_omg_rad.ogg", 1.5, 1, 50};
+    titles[] = {};
+};
+class cbrn_run_rad
+{
+    name="cbrn_run_rad";
+    sound[] = {"scripts\cbrn\sounds\cbrn_run_rad.ogg", 1.5, 1, 50};
+    titles[] = {};
+};
+class cbrn_deadly_rad
+{
+    name="cbrn_deadly_rad";
+    sound[] = {"scripts\cbrn\sounds\cbrn_deadly_rad.ogg", 1.5, 1, 50};
+    titles[] = {};
+};
+class cbrn_danger_rad
+{
+    name="cbrn_danger_rad";
+    sound[] = {"scripts\cbrn\sounds\cbrn_danger_rad.ogg", 1.5, 1, 50};
+    titles[] = {};
+};
+class cbrn_high_rad
+{
+    name="cbrn_high_rad";
+    sound[] = {"scripts\cbrn\sounds\cbrn_high_rad.ogg", 1.5, 1, 50};
+    titles[] = {};
+};
+class cbrn_mid_rad
+{
+    name="cbrn_mid_rad";
+    sound[] = {"scripts\cbrn\sounds\cbrn_mid_rad.ogg", 1.5, 1, 50};
+    titles[] = {};
+};

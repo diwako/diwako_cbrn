@@ -1,6 +1,6 @@
 if (isServer) then {
     publicVariable "cbrn_zoneSimulationRange";
-    cbrn_vehicles = cbrn_vehicles apply {
+        cbrn_vehicles = cbrn_vehicles apply {
         _x params [["_obj", "nothing", [""]], "_value"];
         _obj = missionNamespace getVariable [_obj, _obj];
         if !(_obj isEqualType "") then {
@@ -10,7 +10,7 @@ if (isServer) then {
     };
     cbrn_vebiclesHash = createHashMapFromArray cbrn_vehicles;
     {
-        _x params ["_class"];
+    _x params ["_class"];
         [_class, "initPost",{
             params ["_vehicle"];
             _vehicle setVariable ["cbrn_proofing", cbrn_vebiclesHash getOrDefault [typeOf _vehicle, 0], true];
@@ -50,6 +50,11 @@ if (isNil "cbrn_mask_damage") then {
     cbrn_mask_damage ppEffectCommit 0;
 };
 
+if (cbrn_foggingEnabled) then {
+    "cbrn_gasmask_fog" cutRsc ["cbrn_fog", "PLAIN", 0, false];
+    cbrn_fogPfh = [cbrn_fnc_fogPFH, 0.05, [cba_missiontime]] call CBA_fnc_addPerFrameHandler;
+};
+
 cbrn_loadouteh = ["cba_events_loadoutEvent",{
     call cbrn_fnc_loadoutEH;
 }] call CBA_fnc_addEventHandler;
@@ -84,6 +89,7 @@ _action = ["cbrn_check_oxygen", "Check remaining oxygen","",{
 "ChemiCalDetector" cutRsc ["RscWeaponChemicalDetector", "PLAIN", 1, false];
 cbrn_threatPfh = [cbrn_fnc_threatPFH, 0.5, [cba_missiontime]] call CBA_fnc_addPerFrameHandler;
 cbrn_beepPfh = -1;
+cbrn_geigerPfh = -1;
 
 [{
     private _range = (missionNameSpace getVariable ["cbrn_zoneSimulationRange", 500]) / 2;
@@ -104,10 +110,13 @@ player addEventHandler ["Killed", {
     params ["_unit", "_killer", "_instigator", "_useEffects"];
     if (_unit getVariable ["cbrn_mask_on", false]) then {
         _unit setVariable ["cbrn_mask_on", false, true];
+        _unit setVariable ["cbrn_mask_fogging", false];
+        _unit setVariable ["cbrn_mask_fogged", false];
         cbrn_mask_abberation ppEffectEnable true;
         cbrn_mask_abberation ppEffectAdjust [0,0,true];
         cbrn_mask_abberation ppEffectCommit 1;
         "cbrn_gasmask_overlay" cutFadeOut 1;
+        "cbrn_gasmask_fog" cutFadeOut 1;
         terminate cbrn_breath_handle;
     };
     _unit setVariable ["cbrn_using_threat_meter", false, true];
@@ -119,6 +128,8 @@ player addEventHandler ["Respawn", {
     player setVariable ["cbrn_stoppedAutoDamage", nil];
     player getVariable ["cbrn_using_threat_meter", nil];
     player setVariable ["cbrn_oxygen", nil];
+    player setVariable ["cbrn_mask_fogging", nil];
+    player setVariable ["cbrn_mask_fogged", nil];
 }];
 
 _action = ["cbrn_turn_check_damage", "Check CRBN Exposure","",{
@@ -209,6 +220,7 @@ if !(isNil "CBA_fnc_addItemContextMenuOption") then {
         }, false] call CBA_fnc_addItemContextMenuOption;
     } forEach cbrn_backpacks;
 
+
     ["ChemicalDetector_01_watch_F", "WATCH", "Increase volume", nil, nil,
     [{cbrn_beepVolume < 5},{cbrn_beep}], {
         cbrn_beepVolume = cbrn_beepVolume + 1;
@@ -231,6 +243,19 @@ if !(isNil "CBA_fnc_addItemContextMenuOption") then {
     ["ChemicalDetector_01_watch_F", "WATCH", "Turn beeping off", nil, nil,
     [{cbrn_beep},{cbrn_beep}], {
         cbrn_beep = false;
+        false
+    }, false] call CBA_fnc_addItemContextMenuOption;
+
+    [cbrn_threatGeiger, "CONTAINER", "Turn counter on", nil, nil,
+    [{!cbrn_geiger},{!cbrn_geiger}], {
+        cbrn_geiger = true;
+        cbrn_geigerPfh = [cbrn_fnc_detectorGeigerPFH, 2, [cba_missiontime]] call CBA_fnc_addPerFrameHandler;
+        false
+    }, false] call CBA_fnc_addItemContextMenuOption;
+
+    [cbrn_threatGeiger, "CONTAINER", "Turn counter off", nil, nil,
+    [{cbrn_geiger},{cbrn_geiger}], {
+        cbrn_geiger = false;
         false
     }, false] call CBA_fnc_addItemContextMenuOption;
 
