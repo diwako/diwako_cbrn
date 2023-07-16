@@ -92,7 +92,7 @@ cbrn_beepPfh = -1;
 cbrn_geigerPfh = -1;
 
 [{
-    private _range = (missionNameSpace getVariable ["cbrn_zoneSimulationRange", 500]) / 2;
+    private _range = (missionNameSpace getVariable ["cbrn_zoneSimulationRange", 500]);
     private _activateZones = cbrn_localZones inAreaArray [getPosWorld ace_player, _range, _range, 0 ,false, -1];
     {
         if !(simulationEnabled _x) then {
