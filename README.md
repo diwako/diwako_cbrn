@@ -79,6 +79,10 @@ By default fatigue can add up to a whole second per tick. This value is also aff
 
 Also added was the ability to designate items as geiger counters. By default this behavior is added to the Micro DAGR. These play their sounds in 3D space.
 
+### Compatible with KAT Medical
+
+The script will use some of the chemical warfare function from V2.13.0. This includes, intoxication and gas mask filter. 
+
 ## Requirements
 
 CBA_A3 and ACE3
@@ -187,6 +191,12 @@ Float, value that modifies how much fatigue will cause the mask to fog up more.\
 Fatigue is returned in the range of 0 - 1; therefore a fatigue value of 1 and coefficient of 1 can add up to another second of uptime per second.\
 Higher makes fatigue build up far more fog, lower makes fatigue matter less in terms of fogging.\
 default: 1
+
+### cbrn_kat_enabled
+
+Boolean, the config will detect wheather KAT - Advanced Medical is installed or not.
+True will cause the script to read and use KAT chemical warfare data and injuries when neccessary.
+default: auto
 
 # Contributors
 

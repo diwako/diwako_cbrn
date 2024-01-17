@@ -31,7 +31,8 @@ if (_vehicle isNotEqualTo _unit) then {
     _actualThreat = _actualThreat - (_vehicle getVariable ["cbrn_proofing", 0]);
 };
 
-if (_threadLevel > 0 && cbrn_kat_enabled) then {
+// when the contamination require gasmask only, consume filter in KAT
+if (_threadLevel > 0 && _threadLevel < 2 && cbrn_kat_enabled) then {
     _unit setVariable ["kat_chemical_enteredPoison", true];
 } else {
     _unit setVariable ["kat_chemical_enteredPoison", false];
