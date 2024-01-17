@@ -75,3 +75,6 @@ cbrn_vehicles = [
     ["vroomvroom", 5],
     ["B_Quadbike_01_F", 1]
 ];
+
+// Configuration for KAT - Advanced Medical
+cbrn_kat_enabled = isClass(configfile >> "CfgPatches" >> "kat_main");
