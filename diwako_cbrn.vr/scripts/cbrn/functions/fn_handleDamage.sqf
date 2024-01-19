@@ -62,6 +62,7 @@ if (_threadLevel >= 3) then {
 _actualThreat = _actualThreat max 0;
 
 systemChat format ["Actual Threat: %1 | Mitigated Threat: %2", _threadLevel, _actualThreat];
+// systemChat format ["Actual Threat: %1 | Mitigated Threat: %2", _threadLevel, _actualThreat];
 
 if (_actualThreat < 1) exitWith {
     cbrn_mask_damage ppEffectAdjust [0, 0, true];
