@@ -202,6 +202,7 @@ default: auto
 
 diwako - Main dev  
 Celene - Mask fogging, geiger type
+Alan245 - KAT Compatibility
 
 # Links
 BI Thread: https://forums.bohemia.net/forums/topic/225668-cbrn-script/
