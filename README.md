@@ -79,6 +79,10 @@ By default fatigue can add up to a whole second per tick. This value is also aff
 
 Also added was the ability to designate items as geiger counters. By default this behavior is added to the Micro DAGR. These play their sounds in 3D space.
 
+### Compatible with KAT Medical
+
+The script will use some of the chemical warfare function from V2.13.0. This includes, intoxication and gas mask filter. 
+
 ## Requirements
 
 CBA_A3 and ACE3
@@ -188,10 +192,17 @@ Fatigue is returned in the range of 0 - 1; therefore a fatigue value of 1 and co
 Higher makes fatigue build up far more fog, lower makes fatigue matter less in terms of fogging.\
 default: 1
 
+### cbrn_kat_enabled
+
+Boolean, the config will detect wheather KAT - Advanced Medical is installed or not.
+True will cause the script to read and use KAT chemical warfare data and injuries when neccessary.
+default: auto
+
 # Contributors
 
 diwako - Main dev  
 Celene - Mask fogging, geiger type
+Alan245 - KAT Compatibility
 
 # Links
 BI Thread: https://forums.bohemia.net/forums/topic/225668-cbrn-script/

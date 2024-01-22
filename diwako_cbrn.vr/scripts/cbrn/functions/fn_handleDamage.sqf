@@ -31,10 +31,24 @@ if (_vehicle isNotEqualTo _unit) then {
     _actualThreat = _actualThreat - (_vehicle getVariable ["cbrn_proofing", 0]);
 };
 
+// when the contamination require gasmask only, consume filter in KAT
+if (cbrn_kat_enabled) then {
+    if (_threadLevel > 0 && {_threadLevel < 2}) then {
+        _unit setVariable ["kat_chemical_enteredPoison", true];
+    } else {
+        _unit setVariable ["kat_chemical_enteredPoison", false];
+    };
+};
+
 if (_threadLevel >= 1) then {
     // level 2 threat
     // requires mask
-    _actualThreat = _actualThreat - ([0,1] select (_unit getVariable ["cbrn_mask_on", false]));
+    if (cbrn_kat_enabled) then {
+        private _gasMaskDur = _unit getVariable ["kat_chemical_gasmask_durability", 0] > 0;
+        _actualThreat = _actualThreat - ([0,1] select (_gasMaskDur && _unit getVariable ["cbrn_mask_on", false]));
+    } else {
+        _actualThreat = _actualThreat - ([0,1] select (_unit getVariable ["cbrn_mask_on", false]));
+    };
 };
 if (_threadLevel >= 2) then {
     // level 3 threat
@@ -56,6 +70,10 @@ if (_actualThreat < 1) exitWith {
     cbrn_mask_damage ppEffectCommit 5;
 };
 
+// Cause the unit to have intoxication in KAT
+if (cbrn_kat_enabled) then {
+    _unit setVariable ["kat_chemical_airPoisoning", true];
+};
 
 private _effectStrength = _actualThreat / 5;
 
