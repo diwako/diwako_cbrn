@@ -4,8 +4,8 @@ private _goggles = goggles _unit;
 private _backpack = backpack _unit;
 private _uniform = uniform _unit;
 
-private _hasMask = (cbrn_masks findIf {_x isEqualTo _goggles}) > -1;
-if !(_hasMask && {cbrn_kat_enabled}) then {
+private _hasMask = _goggles in cbrn_masks;
+if (_hasMask && {cbrn_kat_enabled}) then {
     _hasMask = (missionNamespace getVariable ["kat_chemical_availGasmaskList",[]] findIf {_x isEqualTo _goggles}) > -1;
 };
 
