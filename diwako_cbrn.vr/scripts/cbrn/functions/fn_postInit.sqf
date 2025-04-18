@@ -270,4 +270,26 @@ if !(isNil "CBA_fnc_addItemContextMenuOption") then {
         ace_player setVariable ["cbrn_using_threat_meter", false, true];
         false
     }, false] call CBA_fnc_addItemContextMenuOption;
+
+    {
+        _x params ["_item", "_heal"];
+        [_item, "CONTAINER", "Heal contamination damage", nil, nil,
+        [{ace_player getVariable ["cbrn_damage", 0] > 0}, {true}],
+        {
+            params ["", "", "", "", "_heal"];
+            private _newDamage = ((ace_player getVariable ["cbrn_damage", 0]) - _heal) max 0;
+            if (_newDamage isNotEqualTo 0) then {
+                titleText ["You feel a bit better, but you are still contaminated!", "PLAIN DOWN", 0, false, false];
+            } else {
+                titleText ["You feel that the contamination has been purged from your body!", "PLAIN DOWN", 0, false, false];
+            };
+            if (_newDamage isNotEqualto (ace_player getVariable ["cbrn_damage", 0])) then {
+                ace_player setVariable ["cbrn_damage", _newDamage, true];
+            };
+
+            false
+        }, true,
+        _heal
+        ] call CBA_fnc_addItemContextMenuOption;
+    } forEach cbrn_healingItems;
 };
