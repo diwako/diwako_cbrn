@@ -48,7 +48,7 @@ if (_on) then {
     _trg setTriggerArea [1, 1, (getDir _shower), true, 1];
     _trg setTriggerActivation ["ANYPLAYER", "PRESENT", true];
     _trg setTriggerTimeout [5, 5, 5, true];
-    _trg setTriggerStatements ["ace_player getVariable ['cbrn_autoDamage', false] && { !(ace_player getVariable ['cbrn_stoppedAutoDamage', false]) && {ace_player in thisList}}", "ace_player setVariable ['cbrn_stoppedAutoDamage', true]; 'Success!' hintC 'The contamination stopped, it should have not come to this in the first place!'", ""];
+    _trg setTriggerStatements ["(cbrn_deconHealDamage || {ace_player getVariable ['cbrn_autoDamage', false] && { !(ace_player getVariable ['cbrn_stoppedAutoDamage', false])}}) && {ace_player in thisList}", "if (ace_player getVariable ['cbrn_autoDamage', false]) then {ace_player setVariable ['cbrn_stoppedAutoDamage', true]; 'Success!' hintC 'The contamination stopped, it should have not come to this in the first place!'}; if (cbrn_deconHealDamage) then {ace_player setVariable ['cbrn_damage', 0, true]};", ""];
     _particles pushBack _trg;
 
     // Update objects list to delete

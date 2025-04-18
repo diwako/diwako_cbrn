@@ -44,6 +44,9 @@ cbrn_allowPassiveDamage = true;
 // time in seconds how much water a decon shower has, in seconds
 cbrn_deconWaterTime = 60 * 2;
 
+// decon shower heals all cbrn related damage
+cbrn_deconHealDamage = false;
+
 // healing rate for each second, does nothing if 0 or below, or player while player is experiencing passive contamination
 cbrn_healingRate = 0;
 
