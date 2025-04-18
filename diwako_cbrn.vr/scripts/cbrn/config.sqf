@@ -47,6 +47,11 @@ cbrn_deconWaterTime = 60 * 2;
 // healing rate for each second, does nothing if 0 or below, or player while player is experiencing passive contamination
 cbrn_healingRate = 0;
 
+// configure items that heal CBRN related damage, item will be consumed on use!
+// List of arrays, first entry in the array is the item, second is how much it heals
+cbrn_healingItems = [
+    ["ACE_adenosine", 50]
+];
 
 // FOGGING SETTINGS
 // enables or disables fogging entirely
