@@ -28,7 +28,7 @@ class cbrn_fog {
     idd = 1000;
     movingEnable = false;
     duration = 999999;
-    onLoad = "cbrn_fogDisplay = _this"
+    onLoad = "cbrn_fogDisplay = _this";
     controlsBackground[] = {overlay};
     objects[] = {};
 
